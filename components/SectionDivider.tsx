@@ -1,17 +1,12 @@
-export default function SectionDivider({ color = "rgba(34,197,94,0.05)" }: { color?: string }) {
+/* Technical hairline divider — a thin rule with a centered node and edge ticks.
+   Replaces the decorative wave; reads like a seam on a control panel. */
+export default function SectionDivider({ color }: { color?: string }) {
+  void color; // kept for backwards-compat with existing call sites
   return (
-    <div className="relative -my-1 h-16 w-full overflow-hidden" aria-hidden="true">
-      <svg
-        className="absolute inset-0 h-full w-full"
-        viewBox="0 0 1440 64"
-        preserveAspectRatio="none"
-        fill="none"
-      >
-        <path
-          d="M0 32C240 0 480 64 720 32C960 0 1200 64 1440 32V64H0V32Z"
-          fill={color}
-        />
-      </svg>
+    <div className="relative mx-auto h-px w-full max-w-6xl px-6" aria-hidden="true">
+      <div className="relative h-px w-full bg-gradient-to-r from-transparent via-ink-900/12 to-transparent">
+        <span className="absolute left-1/2 top-1/2 h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rotate-45 border border-accent-green/50 bg-paper" />
+      </div>
     </div>
   );
 }

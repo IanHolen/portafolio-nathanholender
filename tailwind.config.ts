@@ -9,33 +9,42 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Light editorial base — warm paper + ink text scale
-        paper: "#f3f1ea",
-        card: "#fffdf8",
+        // ── "Cine + Ops" dark base ──
+        // Deep blue-black canvas + raised control-panel surfaces.
+        paper: "#0B0F1A", // page canvas
+        card: "#111828", // raised panel / tile
+        panel: "#0E1422", // recessed surface
+        // Text scale inverts the original: higher number = brighter on dark.
         ink: {
-          950: "#0e0e08",
-          900: "#18180f",
-          800: "#26261a",
-          700: "#45453a",
-          600: "#5a5a4d",
-          500: "#7a7a6c",
-          400: "#9a9a8b",
-          300: "#c2bfb2",
+          950: "#ffffff",
+          900: "#eef3fb", // primary headings / strongest text
+          800: "#d5deec",
+          700: "#aeb9cc", // body copy
+          600: "#8592a8", // secondary
+          500: "#69768c", // muted labels
+          400: "#525d70", // faint
+          300: "#3a4457", // hairlines-as-color
         },
-        // Deep navy accent (Amazon/Prime Video adjacent); warm ember as secondary.
+        // Prime Video cyan is the signal color; warm amber is the secondary.
         accent: {
-          green: "#17356b",
-          emerald: "#17356b",
-          lime: "#2f5c9e",
-          mint: "#24467f",
-          orange: "#b4531b",
-          amber: "#b4531b",
+          green: "#00A8E1", // primary accent (cyan)
+          emerald: "#00A8E1",
+          lime: "#54D6F6",
+          mint: "#37C4EC",
+          cyan: "#00A8E1",
+          orange: "#F5B44C",
+          amber: "#F5B44C",
+          up: "#39D98A", // positive delta
+          down: "#FF6B7D", // negative delta
         },
       },
       fontFamily: {
         sans: ["var(--font-inter)", "ui-sans-serif", "system-ui"],
-        display: ["var(--font-fraunces)", "ui-serif", "Georgia"],
+        display: ["var(--font-archivo)", "ui-sans-serif", "system-ui"],
         mono: ["var(--font-jetbrains)", "ui-monospace", "Menlo"],
+      },
+      letterSpacing: {
+        poster: "-0.03em",
       },
       animation: {
         "gradient-x": "gradient-x 8s ease infinite",
@@ -44,6 +53,7 @@ const config: Config = {
         "fade-up": "fade-up 0.8s ease-out forwards",
         shimmer: "shimmer 2.5s linear infinite",
         "pulse-glow": "pulse-glow 4s ease-in-out infinite",
+        scan: "scan 6s linear infinite",
       },
       keyframes: {
         "gradient-x": {
@@ -63,15 +73,19 @@ const config: Config = {
           "100%": { "background-position": "1000px 0" },
         },
         "pulse-glow": {
-          "0%, 100%": { opacity: "0.4" },
+          "0%, 100%": { opacity: "0.35" },
           "50%": { opacity: "0.85" },
+        },
+        scan: {
+          "0%": { transform: "translateY(-100%)" },
+          "100%": { transform: "translateY(100%)" },
         },
       },
       backgroundImage: {
         "grid-pattern":
-          "linear-gradient(to right, rgba(24,24,15,0.035) 1px, transparent 1px), linear-gradient(to bottom, rgba(24,24,15,0.035) 1px, transparent 1px)",
+          "linear-gradient(to right, rgba(120,170,220,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(120,170,220,0.05) 1px, transparent 1px)",
         "radial-fade":
-          "radial-gradient(ellipse at top, rgba(23,53,107,0.06), transparent 62%)",
+          "radial-gradient(ellipse at top, rgba(0,168,225,0.12), transparent 60%)",
       },
     },
   },

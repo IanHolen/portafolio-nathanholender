@@ -2,17 +2,7 @@
 
 import { useEffect, useState, useRef, useCallback, MouseEvent } from "react";
 import { motion, useInView } from "framer-motion";
-import {
-  ArrowDown,
-  Download,
-  Briefcase,
-  GraduationCap,
-  Globe2,
-  Languages,
-  Mail,
-  Phone,
-  MapPin,
-} from "lucide-react";
+import { ArrowDown, Download } from "lucide-react";
 import { profile, companies, heroStats } from "@/lib/data";
 import { useLocale } from "./I18nProvider";
 import { t } from "@/lib/translations";
@@ -21,8 +11,8 @@ import type { TranslationKey } from "@/lib/translations";
 function heroBrand(label: string): string {
   const l = label.toLowerCase();
   if (l.includes("linkedin")) return "#0A66C2";
-  if (l.includes("mail")) return "#dc2626";
-  return "#17356b";
+  if (l.includes("mail")) return "#00A8E1";
+  return "#00A8E1";
 }
 
 function HeroSocial({ label, href }: { label: string; href: string }) {
@@ -37,10 +27,10 @@ function HeroSocial({ label, href }: { label: string; href: string }) {
       onMouseLeave={() => setHover(false)}
       style={
         hover
-          ? { backgroundColor: color, borderColor: color, color: "#fff" }
+          ? { backgroundColor: color, borderColor: color, color: "#0b0f1a" }
           : undefined
       }
-      className="inline-flex items-center justify-center rounded-full border border-ink-900/15 px-6 py-3.5 text-sm font-medium text-ink-800 transition duration-200 hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-green focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
+      className="inline-flex items-center justify-center border border-white/15 px-5 py-3 font-mono text-xs uppercase tracking-wider text-ink-700 transition duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-green focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
     >
       {label}
     </a>
@@ -65,12 +55,7 @@ function MagneticWrap({ children }: { children: React.ReactNode }) {
   }, []);
   const onLeave = useCallback(() => setOffset({ x: 0, y: 0 }), []);
   return (
-    <div
-      ref={ref}
-      onMouseMove={onMove}
-      onMouseLeave={onLeave}
-      className="inline-block"
-    >
+    <div ref={ref} onMouseMove={onMove} onMouseLeave={onLeave} className="inline-block">
       <div
         style={{
           transform: `translate(${offset.x}px, ${offset.y}px)`,
@@ -97,7 +82,7 @@ const fadeUp = {
 };
 
 const letterVariants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 24 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
@@ -161,6 +146,14 @@ function AnimatedCounter({ value, suffix }: { value: number; suffix: string }) {
   );
 }
 
+// Deltas verificados del CV — refuerzan el lenguaje "ops".
+const STAT_DELTA: Record<string, { text: string; up?: boolean }> = {
+  assets: { text: "+70.4% YoY", up: true },
+  campaigns: { text: "+25.8% YoY", up: true },
+  gms: { text: "+72% YoY", up: true },
+  years: { text: "@ Amazon" },
+};
+
 export default function Hero() {
   const { locale } = useLocale();
 
@@ -171,61 +164,68 @@ export default function Hero() {
     label: t(`hero.stat.${s.key}` as TranslationKey, locale),
   }));
 
-  const info = [
+  const meta = [
     {
-      Icon: Briefcase,
       label: t("hero.info.role", locale),
       value: t("hero.info.roleValue", locale),
       sub: t("hero.info.roleSub", locale),
     },
     {
-      Icon: GraduationCap,
       label: t("hero.info.education", locale),
       value: t("hero.info.educationValue", locale),
       sub: t("hero.info.educationSub", locale),
     },
     {
-      Icon: Globe2,
       label: t("hero.info.scope", locale),
       value: t("hero.info.scopeValue", locale),
     },
     {
-      Icon: Languages,
       label: t("hero.info.languages", locale),
       value: t("hero.info.languagesValue", locale),
     },
   ];
 
   return (
-    <section id="top" className="relative flex min-h-screen items-center px-6 pt-32">
+    <section id="top" className="relative overflow-hidden px-6 pb-16 pt-28 md:pt-32">
       <div className="mx-auto w-full max-w-6xl">
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={fadeUp}
-          custom={0}
-          className="mb-10 flex flex-wrap items-center gap-4"
-        >
-          <span className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-accent-green">
-            <span className="h-1.5 w-1.5 rounded-full bg-accent-green" />
-            {t("hero.available", locale)}
-          </span>
-        </motion.div>
+        <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-14">
+          {/* ── Identidad ── */}
+          <div className="order-2 lg:order-1">
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={fadeUp}
+              custom={0}
+              className="mb-7 inline-flex items-center gap-2.5 border border-accent-green/30 bg-accent-green/5 px-3 py-1.5"
+            >
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent-green opacity-70" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-accent-green" />
+              </span>
+              <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-accent-green">
+                {t("hero.available", locale)}
+              </span>
+            </motion.div>
 
-        <div className="grid gap-12 md:grid-cols-[1.15fr_0.85fr] md:items-stretch lg:gap-16">
-          {/* Identidad + pitch + métricas */}
-          <div>
-            <h1 className="font-display text-[clamp(2.6rem,6.2vw,5.6rem)] font-medium leading-[0.92] tracking-tight">
-              <SplitText text={profile.firstName} className="block text-ink-900" />
-              <SplitText text={profile.lastName} className="block text-ink-400" />
+            <h1 className="font-display font-extrabold uppercase leading-[0.86] tracking-poster">
+              <SplitText
+                text={profile.firstName}
+                className="block whitespace-nowrap text-[clamp(2.5rem,7.6vw,5.6rem)] text-ink-900"
+              />
+              <span
+                className="block whitespace-nowrap text-[clamp(2.5rem,7.6vw,5.6rem)] text-transparent"
+                style={{ WebkitTextStroke: "1.5px #00A8E1" }}
+              >
+                <SplitText text={profile.lastName} />
+              </span>
             </h1>
 
             <motion.p
               initial="hidden"
               animate="visible"
               variants={fadeUp}
-              custom={2}
-              className="mt-6 font-mono text-xs uppercase tracking-[0.18em] text-ink-600 sm:text-sm"
+              custom={2.4}
+              className="mt-6 max-w-md font-mono text-xs uppercase tracking-[0.16em] text-accent-green"
             >
               {t("hero.role", locale)}
             </motion.p>
@@ -234,8 +234,8 @@ export default function Hero() {
               initial="hidden"
               animate="visible"
               variants={fadeUp}
-              custom={2.6}
-              className="mt-6 max-w-lg text-lg leading-relaxed text-ink-700"
+              custom={2.8}
+              className="mt-5 max-w-lg text-base leading-relaxed text-ink-700 md:text-lg"
             >
               {t("hero.tagline", locale)}
             </motion.p>
@@ -244,138 +244,13 @@ export default function Hero() {
               initial="hidden"
               animate="visible"
               variants={fadeUp}
-              custom={3.1}
-              className="mt-8 grid max-w-lg grid-cols-2 gap-x-8 gap-y-6 border-t border-ink-900/10 pt-7"
+              custom={3.3}
+              className="mt-8 flex flex-wrap items-center gap-3"
             >
-              {stats.map((s) => (
-                <div key={s.key}>
-                  <p className="font-display text-3xl font-medium text-ink-900">
-                    <AnimatedCounter value={s.value} suffix={s.suffix} />
-                  </p>
-                  <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.16em] text-ink-500">
-                    {s.label}
-                  </p>
-                </div>
-              ))}
-            </motion.div>
-
-            <motion.div
-              initial="hidden"
-              animate="visible"
-              variants={fadeUp}
-              custom={3.5}
-              className="mt-8 grid max-w-lg grid-cols-2 gap-3.5"
-            >
-              {info.map((it) => (
-                <div
-                  key={it.label}
-                  className="rounded-2xl border border-ink-900/10 bg-card p-5"
-                >
-                  <div className="mb-2.5 flex items-center gap-2 text-accent-green">
-                    <it.Icon className="h-4 w-4" strokeWidth={1.75} />
-                    <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-ink-500">
-                      {it.label}
-                    </span>
-                  </div>
-                  <p className="text-sm font-medium leading-snug text-ink-900">
-                    {it.value}
-                  </p>
-                  {it.sub && (
-                    <p className="mt-1 text-[11px] leading-snug text-ink-500">
-                      {it.sub}
-                    </p>
-                  )}
-                </div>
-              ))}
-            </motion.div>
-          </div>
-
-          {/* Retrato */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.96, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.3, ease: [0.2, 0.8, 0.2, 1] }}
-            className="relative mx-auto w-full max-w-[360px] md:h-full md:max-w-none"
-          >
-            <div className="pointer-events-none absolute -right-6 -top-6 h-40 w-40 rounded-full bg-accent-green/15 blur-3xl" />
-            <div className="pointer-events-none absolute -bottom-6 -left-6 h-40 w-40 rounded-full bg-accent-green/10 blur-3xl" />
-            <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] border border-ink-900/10 bg-card shadow-[0_40px_90px_-40px_rgba(24,24,15,0.35)] md:aspect-auto md:h-full md:min-h-[520px]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/nathan-portrait.png"
-                alt={`${profile.firstName} ${profile.lastName}`}
-                className="absolute inset-0 h-full w-full object-cover object-top"
-              />
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Tarjetas de contacto + CTA */}
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={fadeUp}
-          custom={3.9}
-          className="mt-16 md:mt-20"
-        >
-          <div className="grid gap-4 sm:grid-cols-3">
-            {[
-              {
-                Icon: Mail,
-                label: t("contact.infoEmail", locale),
-                value: profile.email,
-                href: `mailto:${profile.email}`,
-              },
-              {
-                Icon: Phone,
-                label: t("contact.infoPhone", locale),
-                value: profile.phone,
-                href: `tel:${profile.phone.replace(/\s+/g, "")}`,
-              },
-              {
-                Icon: MapPin,
-                label: t("contact.infoLocation", locale),
-                value: profile.location,
-              },
-            ].map((c) => {
-              const inner = (
-                <>
-                  <div className="mb-3 flex items-center gap-2.5 text-accent-green">
-                    <c.Icon className="h-4 w-4" strokeWidth={1.75} />
-                    <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-ink-500">
-                      {c.label}
-                    </span>
-                  </div>
-                  <p className="break-words text-base font-medium leading-snug text-ink-900 md:text-lg">
-                    {c.value}
-                  </p>
-                </>
-              );
-              return c.href ? (
-                <a
-                  key={c.label}
-                  href={c.href}
-                  className="rounded-2xl border border-ink-900/10 bg-card p-6 transition hover:border-accent-green/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-green focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
-                >
-                  {inner}
-                </a>
-              ) : (
-                <div
-                  key={c.label}
-                  className="rounded-2xl border border-ink-900/10 bg-card p-6"
-                >
-                  {inner}
-                </div>
-              );
-            })}
-          </div>
-
-          <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
-            <div className="flex flex-wrap items-center gap-3">
               <MagneticWrap>
                 <a
                   href="#achievements"
-                  className="group inline-flex items-center gap-2 rounded-full bg-ink-900 px-6 py-3.5 text-sm font-medium text-paper transition hover:bg-ink-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-green focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
+                  className="group inline-flex items-center gap-2 bg-accent-green px-6 py-3.5 font-mono text-xs font-semibold uppercase tracking-wider text-paper transition hover:bg-accent-lime focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-green focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
                 >
                   {t("hero.cta", locale)}
                   <ArrowDown className="h-4 w-4 transition group-hover:translate-y-0.5" />
@@ -385,51 +260,141 @@ export default function Hero() {
                 <a
                   href={profile.cvUrl}
                   download
-                  className="group inline-flex items-center gap-2 rounded-full border border-ink-900/15 px-6 py-3.5 text-sm text-ink-800 transition hover:border-ink-900/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-green focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
+                  className="group inline-flex items-center gap-2 border border-white/15 px-6 py-3.5 font-mono text-xs uppercase tracking-wider text-ink-800 transition hover:border-accent-green/50 hover:text-ink-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-green focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
                 >
                   <Download className="h-4 w-4 transition group-hover:translate-y-0.5" />
                   {t("hero.downloadCv", locale)}
                 </a>
               </MagneticWrap>
-            </div>
-            <div className="flex flex-wrap items-center gap-3">
-              {profile.socials.map((s) => (
-                <HeroSocial key={s.label} label={s.label} href={s.href} />
-              ))}
-            </div>
+              <div className="flex items-center gap-3">
+                {profile.socials.map((s) => (
+                  <HeroSocial key={s.label} label={s.label} href={s.href} />
+                ))}
+              </div>
+            </motion.div>
           </div>
+
+          {/* ── Retrato cinematográfico ── */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.98, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.3, ease: [0.2, 0.8, 0.2, 1] }}
+            className="order-1 mx-auto w-full max-w-[380px] lg:order-2 lg:max-w-none"
+          >
+            <div className="corner-ticks relative aspect-[4/5] w-full overflow-hidden border border-white/10 bg-panel">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/nathan-portrait.png"
+                alt={`${profile.firstName} ${profile.lastName}`}
+                className="absolute inset-0 h-full w-full object-cover object-top contrast-[1.05] grayscale"
+              />
+              {/* duotone cyan wash + cinematic scrims */}
+              <div className="pointer-events-none absolute inset-0 bg-accent-green/25 mix-blend-color" />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-paper via-paper/10 to-transparent" />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-accent-green/10 via-transparent to-transparent" />
+              {/* scanline sweep */}
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-24 animate-scan bg-gradient-to-b from-accent-green/15 to-transparent" />
+              {/* REC tag */}
+              <div className="absolute left-4 top-4 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-ink-300">
+                <span className="h-1.5 w-1.5 rounded-full bg-accent-down" />
+                REC
+              </div>
+              <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between font-mono text-[10px] uppercase tracking-[0.18em] text-ink-500">
+                <span>{profile.location}</span>
+                <span className="text-accent-green">PVI · AMZN</span>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* ── Franja de KPIs (firma "ops") ── */}
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={fadeUp}
+          custom={3.8}
+          className="mt-14 grid grid-cols-2 border border-white/10 md:grid-cols-4"
+        >
+          {stats.map((s, i) => {
+            const delta = STAT_DELTA[s.key];
+            return (
+              <div
+                key={s.key}
+                className={`relative p-5 md:p-6 ${
+                  i % 2 === 0 ? "border-r border-white/10" : ""
+                } ${i < 2 ? "border-b border-white/10 md:border-b-0" : ""} ${
+                  i === 2 ? "md:border-r md:border-white/10" : ""
+                }`}
+              >
+                <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink-500">
+                  {String(i + 1).padStart(2, "0")} / {s.label}
+                </p>
+                <p className="mt-3 font-display text-4xl font-extrabold tracking-tight text-ink-900 md:text-5xl">
+                  <AnimatedCounter value={s.value} suffix={s.suffix} />
+                </p>
+                {delta && (
+                  <p
+                    className={`mt-2 font-mono text-[11px] ${
+                      delta.up ? "text-accent-up" : "text-ink-500"
+                    }`}
+                  >
+                    {delta.up ? "▲ " : ""}
+                    {delta.text}
+                  </p>
+                )}
+              </div>
+            );
+          })}
         </motion.div>
 
-        {/* Strip de empresas */}
+        {/* ── Spec-sheet + empresas ── */}
         <motion.div
           initial="hidden"
           animate="visible"
           variants={fadeUp}
           custom={4}
-          className="mt-14 flex flex-col gap-6 border-t border-ink-900/10 pt-8 md:mt-16 md:flex-row md:items-center md:gap-12"
+          className="mt-10 grid gap-10 md:grid-cols-[1.4fr_1fr]"
         >
-          <span className="shrink-0 font-mono text-[11px] uppercase tracking-[0.2em] text-ink-400">
-            {t("hero.workedAt", locale)}
-          </span>
-          <div className="flex flex-wrap items-center gap-x-10 gap-y-5">
-            {companies.map((c) => (
-              <div key={c.name} className="group flex items-center gap-3">
-                <div className="flex items-center gap-1.5">
-                  {c.logos.map((logo) => (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                      key={logo}
-                      src={logo}
-                      alt={c.name}
-                      className="h-9 w-auto object-contain opacity-70 grayscale transition duration-300 group-hover:opacity-100 group-hover:grayscale-0"
-                    />
-                  ))}
-                </div>
-                <span className="font-display text-xl text-ink-500 transition-colors duration-300 group-hover:text-ink-900">
-                  {c.name}
-                </span>
+          <div className="grid gap-x-8 gap-y-5 sm:grid-cols-2">
+            {meta.map((m) => (
+              <div key={m.label} className="border-l border-accent-green/40 pl-4">
+                <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-ink-500">
+                  {m.label}
+                </p>
+                <p className="mt-1.5 text-sm font-medium leading-snug text-ink-900">
+                  {m.value}
+                </p>
+                {m.sub && (
+                  <p className="mt-0.5 text-[11px] leading-snug text-ink-500">{m.sub}</p>
+                )}
               </div>
             ))}
+          </div>
+
+          <div>
+            <p className="mb-4 font-mono text-[10px] uppercase tracking-[0.2em] text-ink-500">
+              {t("hero.workedAt", locale)}
+            </p>
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-4">
+              {companies.map((c) => (
+                <div key={c.name} className="group flex items-center gap-2.5">
+                  <span className="inline-flex h-7 items-center gap-1 rounded bg-white/95 px-1.5">
+                    {c.logos.map((logo) => (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        key={logo}
+                        src={logo}
+                        alt={c.name}
+                        className="h-4 w-auto object-contain"
+                      />
+                    ))}
+                  </span>
+                  <span className="font-mono text-xs uppercase tracking-wide text-ink-500 transition-colors duration-300 group-hover:text-ink-800">
+                    {c.name}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
         </motion.div>
       </div>

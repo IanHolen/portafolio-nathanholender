@@ -2,14 +2,14 @@ import type { Metadata, Viewport } from "next";
 // Fuentes variables self-hosted (sin fetch externo — funciona offline y en Vercel)
 import "@fontsource-variable/inter";
 import "@fontsource-variable/jetbrains-mono";
-import "@fontsource-variable/fraunces";
+import "@fontsource-variable/archivo";
 import "./globals.css";
 import CommandPalette from "@/components/CommandPalette";
 import ReadingProgress from "@/components/ReadingProgress";
 import Providers from "@/components/Providers";
 import SkipLink from "@/components/SkipLink";
 
-export const SITE_URL =
+const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://nathanholender.vercel.app";
 
 const SITE_TITLE = "Nathan Holender — Production & Operations Manager";
@@ -55,8 +55,8 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f3f1ea",
-  colorScheme: "light",
+  themeColor: "#0b0f1a",
+  colorScheme: "dark",
 };
 
 // Script inline: fija el idioma desde localStorage antes del primer paint.
@@ -76,7 +76,7 @@ export default function RootLayout({
         <Providers>
           <SkipLink />
           <div className="pointer-events-none fixed inset-0 -z-10 bg-radial-fade" />
-          <div className="pointer-events-none fixed inset-0 -z-10 bg-grid-pattern [background-size:56px_56px] opacity-40 [mask-image:radial-gradient(ellipse_at_center,black,transparent_70%)]" />
+          <div className="pointer-events-none fixed inset-0 -z-10 bg-grid-pattern [background-size:64px_64px] opacity-60 [mask-image:radial-gradient(ellipse_at_center,black,transparent_75%)]" />
           <ReadingProgress />
           <CommandPalette />
           {children}

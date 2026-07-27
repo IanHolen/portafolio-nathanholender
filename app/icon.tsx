@@ -14,12 +14,13 @@ export default function Icon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "#18180f",
-          color: "#f3f1ea",
-          fontSize: 19,
-          fontWeight: 600,
+          background: "#0b0f1a",
+          color: "#00A8E1",
+          fontSize: 18,
+          fontWeight: 800,
           letterSpacing: -1,
-          fontFamily: "Georgia, 'Times New Roman', serif",
+          fontFamily: "Arial, Helvetica, sans-serif",
+          border: "2px solid #00A8E1",
         }}
       >
         NH

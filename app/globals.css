@@ -3,10 +3,10 @@
 @tailwind utilities;
 
 :root {
-  --bg: #f3f1ea;
-  --fg: #18180f;
+  --bg: #0b0f1a;
+  --fg: #eef3fb;
   --font-inter: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
-  --font-fraunces: "Fraunces Variable", ui-serif, Georgia, serif;
+  --font-archivo: "Archivo Variable", ui-sans-serif, system-ui, sans-serif;
   --font-jetbrains: "JetBrains Mono Variable", ui-monospace, Menlo, monospace;
 }
 
@@ -22,38 +22,66 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Warm paper base with a whisper of warmth at the top */
+/* Deep blue-black canvas with a cinematic wash of cyan at the top */
 body {
-  background: radial-gradient(ellipse 120% 80% at 50% -10%, #f7f5ee 0%, #f3f1ea 55%) no-repeat;
-  background-color: #f3f1ea;
+  background:
+    radial-gradient(ellipse 130% 90% at 50% -10%, #101a2d 0%, #0b0f1a 58%) no-repeat;
+  background-color: #0b0f1a;
   color: var(--fg);
   overflow-x: hidden;
 }
 
 ::selection {
-  background: rgba(23, 53, 107, 0.16);
-  color: #18180f;
+  background: rgba(0, 168, 225, 0.28);
+  color: #ffffff;
 }
 
 @layer utilities {
+  /* Poster/headline gradient: white → cyan */
   .text-gradient {
-    background: linear-gradient(100deg, #18180f 0%, #6a6a5c 100%);
+    background: linear-gradient(100deg, #ffffff 0%, #54d6f6 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
 
   .text-gradient-warm {
-    background: linear-gradient(100deg, #18180f 0%, #17356b 100%);
+    background: linear-gradient(100deg, #ffffff 0%, #00a8e1 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
 
   .glass {
-    background: rgba(255, 255, 255, 0.55);
+    background: rgba(17, 24, 40, 0.6);
     backdrop-filter: blur(12px);
-    border: 1px solid rgba(24, 24, 15, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  /* Ops-panel corner ticks */
+  .corner-ticks {
+    position: relative;
+  }
+  .corner-ticks::before,
+  .corner-ticks::after {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-color: rgba(0, 168, 225, 0.5);
+    pointer-events: none;
+  }
+  .corner-ticks::before {
+    top: 10px;
+    left: 10px;
+    border-top: 1px solid;
+    border-left: 1px solid;
+  }
+  .corner-ticks::after {
+    bottom: 10px;
+    right: 10px;
+    border-bottom: 1px solid;
+    border-right: 1px solid;
   }
 
   .border-gradient {
@@ -66,7 +94,7 @@ body {
     inset: 0;
     border-radius: inherit;
     padding: 1px;
-    background: linear-gradient(135deg, rgba(23, 53, 107, 0.4), rgba(23, 53, 107, 0.12) 50%, rgba(23, 53, 107, 0) 100%);
+    background: linear-gradient(135deg, rgba(0, 168, 225, 0.55), rgba(0, 168, 225, 0.15) 50%, rgba(0, 168, 225, 0) 100%);
     -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     -webkit-mask-composite: xor;
@@ -98,11 +126,11 @@ body {
     padding: 1px;
     background: conic-gradient(
       from var(--glow-angle, 0deg),
-      rgba(23, 53, 107, 0.5),
-      rgba(23, 53, 107, 0.25),
-      rgba(23, 53, 107, 0) 50%,
-      rgba(23, 53, 107, 0.25),
-      rgba(23, 53, 107, 0.5)
+      rgba(0, 168, 225, 0.6),
+      rgba(0, 168, 225, 0.28),
+      rgba(0, 168, 225, 0) 50%,
+      rgba(0, 168, 225, 0.28),
+      rgba(0, 168, 225, 0.6)
     );
     -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
@@ -143,11 +171,11 @@ body {
     scroll-behavior: auto !important;
   }
 
-  .animate-marquee {
+  .animate-marquee,
+  .animate-scan {
     animation: none !important;
   }
 
-  /* Projects marquee: no auto-motion, but keep every card reachable by manual swipe */
   .projects-marquee-track {
     animation: none !important;
     transform: none !important;
@@ -166,9 +194,8 @@ body {
 }
 
 @media print {
-  body::before, .pointer-events-none, canvas, .animate-marquee { display: none !important; }
+  body::before, .pointer-events-none, canvas, .animate-marquee, .animate-scan { display: none !important; }
   * { color: black !important; background: white !important; border-color: #ddd !important; }
   section { break-inside: avoid; padding: 1rem 0 !important; }
-  .font-display { font-style: normal !important; }
   a[href]::after { content: " (" attr(href) ")"; font-size: 0.8em; color: #666 !important; }
 }

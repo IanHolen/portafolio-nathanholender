@@ -54,9 +54,9 @@ function TiltCard({
       style={{ transform, transition }}
     >
       <div
-        className="pointer-events-none absolute inset-0 z-20 rounded-3xl opacity-0 transition-opacity duration-300 group-hover/card:opacity-100"
+        className="pointer-events-none absolute inset-0 z-20 opacity-0 transition-opacity duration-300 group-hover/card:opacity-100"
         style={{
-          background: `radial-gradient(circle at ${shine.x}% ${shine.y}%, rgba(255,255,255,0.06) 0%, transparent 60%)`,
+          background: `radial-gradient(circle at ${shine.x}% ${shine.y}%, rgba(0,168,225,0.12) 0%, transparent 55%)`,
         }}
       />
       {children}
@@ -123,8 +123,8 @@ export default function Achievements() {
   };
 
   return (
-    <section id="achievements" className="relative overflow-hidden px-6 py-32">
-      <div className="pointer-events-none absolute -right-40 top-1/3 h-[400px] w-[400px] rounded-full bg-accent-green/10 blur-[140px]" />
+    <section id="achievements" className="relative overflow-hidden px-6 py-28 md:py-36">
+      <div className="pointer-events-none absolute -right-40 top-1/3 h-[400px] w-[400px] rounded-full bg-accent-green/10 blur-[150px]" />
       <div className="mx-auto mb-8 max-w-6xl">
         <SectionHeader
           index="03"
@@ -132,18 +132,18 @@ export default function Achievements() {
           title={t("achievements.title", locale)}
         />
 
-        <div className="mt-4 hidden items-center justify-end gap-2 md:flex">
+        <div className="mt-2 hidden items-center justify-end gap-2 md:flex">
           <button
             onClick={() => scrollByDir(-1)}
             aria-label={t("achievements.scrollLeft", locale)}
-            className="rounded-full border border-ink-900/10 p-2.5 text-ink-500 transition hover:border-ink-900/25 hover:text-ink-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-green focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
+            className="border border-white/10 p-2.5 text-ink-500 transition hover:border-accent-green/50 hover:text-accent-green focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-green focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
           >
             <ChevronLeft className="h-5 w-5" />
           </button>
           <button
             onClick={() => scrollByDir(1)}
             aria-label={t("achievements.scrollRight", locale)}
-            className="rounded-full border border-ink-900/10 p-2.5 text-ink-500 transition hover:border-ink-900/25 hover:text-ink-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-green focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
+            className="border border-white/10 p-2.5 text-ink-500 transition hover:border-accent-green/50 hover:text-accent-green focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-green focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
           >
             <ChevronRight className="h-5 w-5" />
           </button>
@@ -175,13 +175,13 @@ export default function Achievements() {
                 data-card
                 className="mr-5 w-[85vw] shrink-0 snap-start select-none sm:mr-6 sm:w-[440px] md:w-[500px]"
               >
-                <AchievementCard a={a} text={texts[i]} />
+                <AchievementCard a={a} text={texts[i]} index={i} />
               </div>
             ))}
           </div>
         </div>
 
-        <div className="mt-6 flex items-center justify-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-ink-400 md:hidden">
+        <div className="mt-6 flex items-center justify-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-ink-500 md:hidden">
           <span>{t("achievements.swipeHint", locale)}</span>
           <motion.span
             aria-hidden
@@ -200,38 +200,40 @@ export default function Achievements() {
 function AchievementCard({
   a,
   text,
+  index,
 }: {
   a: (typeof achievements)[number];
   text?: AchievementText;
+  index: number;
 }) {
   if (!text) return null;
   return (
-    <TiltCard className="group/card relative block h-full overflow-hidden rounded-3xl border border-ink-900/10 bg-card p-8 transition-all duration-500 hover:border-ink-900/15 md:p-10">
+    <TiltCard className="group/card corner-ticks relative block h-full overflow-hidden border border-white/10 bg-card p-8 transition-colors duration-500 hover:border-accent-green/30 md:p-10">
       <div
         className={`pointer-events-none absolute inset-0 -z-0 bg-gradient-to-br ${a.accent} opacity-0 transition-opacity duration-700 group-hover/card:opacity-100`}
       />
-      <div className="pointer-events-none absolute -right-32 -top-32 h-64 w-64 rounded-full bg-black/[0.04] opacity-0 blur-3xl transition-opacity duration-500 group-hover/card:opacity-100" />
 
       <div className="relative z-10 flex h-full flex-col">
-        <div className="mb-10 flex items-start justify-between">
-          <span className="font-mono text-xs uppercase tracking-[0.22em] text-ink-400">
-            {a.company} · {a.year}
+        <div className="mb-8 flex items-start justify-between font-mono text-[10px] uppercase tracking-[0.2em] text-ink-500">
+          <span>
+            {String(index + 1).padStart(2, "0")} · {a.company}
           </span>
+          <span>{a.year}</span>
         </div>
 
-        <div className="mb-4 inline-block self-start rounded-full border border-accent-green/30 bg-accent-green/10 px-4 py-1.5 font-mono text-sm font-medium text-accent-green">
+        <p className="font-display text-3xl font-extrabold leading-none tracking-tight text-accent-green md:text-4xl">
           {text.metric}
-        </div>
-        <h3 className="font-display text-3xl font-light leading-tight tracking-tight text-ink-900 md:text-4xl">
+        </p>
+        <h3 className="mt-4 font-display text-xl font-bold uppercase leading-tight tracking-poster text-ink-900 md:text-2xl">
           {text.title}
         </h3>
-        <p className="mt-4 max-w-md text-ink-600">{text.blurb}</p>
+        <p className="mt-4 max-w-md text-sm leading-relaxed text-ink-600">{text.blurb}</p>
 
         <div className="mt-auto flex flex-wrap gap-2 pt-10">
           {a.tags.map((tag) => (
             <span
               key={tag}
-              className="rounded-full border border-ink-900/10 bg-black/[0.03] px-3 py-1 text-xs text-ink-600"
+              className="border border-white/10 bg-white/[0.03] px-2.5 py-1 font-mono text-[10px] uppercase tracking-wide text-ink-600"
             >
               {tag}
             </span>

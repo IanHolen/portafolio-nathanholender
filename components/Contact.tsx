@@ -75,14 +75,13 @@ export default function Contact() {
     setTimeout(() => setCopied(false), 2000);
   }
 
+  const inputCls =
+    "w-full border border-white/10 bg-panel px-5 py-4 text-ink-900 placeholder:text-ink-500 transition focus:border-accent-green/50 focus:outline-none focus:ring-2 focus:ring-accent-green/20";
+
   return (
-    <section
-      id="contact"
-      className="relative overflow-hidden px-6 py-32 md:py-48"
-    >
-      {/* atmospheric glow */}
+    <section id="contact" className="relative overflow-hidden px-6 py-28 md:py-40">
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent-green/20 blur-[140px]" />
+        <div className="absolute left-1/2 top-1/2 h-[560px] w-[560px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent-green/15 blur-[150px]" />
       </div>
 
       <div className="mx-auto max-w-6xl">
@@ -93,38 +92,38 @@ export default function Contact() {
           transition={{ duration: 0.9 }}
           className="text-center"
         >
-          <p className="mb-6 font-mono text-xs uppercase tracking-[0.3em] text-accent-green">
+          <p className="mb-6 font-mono text-[11px] uppercase tracking-[0.3em] text-accent-green">
             {t("contact.kicker", locale)}
           </p>
-          <h2 className="font-display text-4xl font-light leading-[1.05] tracking-tight md:text-7xl">
+          <h2 className="font-display text-[clamp(2.4rem,6vw,4.75rem)] font-extrabold uppercase leading-[0.95] tracking-poster">
             {t("contact.title1", locale)}{" "}
             <span className="text-gradient">{t("contact.title2", locale)}</span>
           </h2>
-          <p className="mx-auto mt-8 max-w-xl text-lg text-ink-600">
+          <p className="mx-auto mt-8 max-w-xl text-ink-600">
             {t("contact.subtitle", locale)}
           </p>
 
           <div className="mt-12 flex flex-wrap items-center justify-center gap-3">
             <a
               href={`mailto:${profile.email}`}
-              className="group inline-flex items-center gap-3 rounded-full bg-ink-900 px-8 py-5 text-base font-medium text-paper transition hover:bg-ink-900/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-green focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
+              className="group inline-flex items-center gap-3 bg-accent-green px-8 py-5 font-mono text-sm font-semibold uppercase tracking-wider text-paper transition hover:bg-accent-lime focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-green focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
             >
               {profile.email}
               <ArrowUpRight className="h-5 w-5 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
             </a>
             <button
               onClick={copyEmail}
-              className="relative inline-flex items-center gap-2 rounded-full border border-ink-900/10 bg-black/[0.04] px-5 py-5 text-sm text-ink-700 transition hover:bg-black/[0.06] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-green focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
+              className="relative inline-flex items-center gap-2 border border-white/15 px-5 py-5 text-sm text-ink-700 transition hover:border-accent-green/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-green focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
               aria-label={t("contact.copyEmail", locale)}
             >
-              {copied ? <Check className="h-4 w-4 text-green-400" /> : <Copy className="h-4 w-4" />}
+              {copied ? <Check className="h-4 w-4 text-accent-up" /> : <Copy className="h-4 w-4" />}
               <AnimatePresence>
                 {copied && (
                   <motion.span
                     initial={{ opacity: 0, y: 4 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0 }}
-                    className="text-xs text-green-400"
+                    className="font-mono text-xs uppercase text-accent-up"
                   >
                     {t("contact.copied", locale)}
                   </motion.span>
@@ -146,25 +145,23 @@ export default function Contact() {
             {submitted ? (
               <motion.div
                 key="thanks"
-                initial={{ opacity: 0, scale: 0.95 }}
+                initial={{ opacity: 0, scale: 0.97 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="rounded-2xl border border-ink-900/10 bg-card p-10 text-center"
+                className="border border-white/10 bg-card p-10 text-center"
               >
-                <p className="font-display text-2xl font-light text-ink-900">{t("contact.formSent", locale)}</p>
+                <p className="font-display text-2xl font-bold uppercase tracking-poster text-ink-900">
+                  {t("contact.formSent", locale)}
+                </p>
                 <p className="mt-3 text-ink-600">{t("contact.formThanks", locale)}</p>
                 <button
                   onClick={resetForm}
-                  className="mt-6 rounded-full border border-ink-900/10 bg-black/[0.04] px-6 py-2 text-sm text-ink-700 transition hover:bg-black/[0.06] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-green focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
+                  className="mt-6 border border-white/15 px-6 py-2 font-mono text-xs uppercase tracking-wider text-ink-700 transition hover:border-accent-green/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-green focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
                 >
                   {t("contact.formAnother", locale)}
                 </button>
               </motion.div>
             ) : (
-              <motion.form
-                key="form"
-                onSubmit={handleSubmit}
-                className="space-y-5"
-              >
+              <motion.form key="form" onSubmit={handleSubmit} className="space-y-4">
                 {/* Honeypot — hidden from humans */}
                 <input
                   type="text"
@@ -184,9 +181,9 @@ export default function Contact() {
                     aria-label={t("contact.formName", locale)}
                     value={form.name}
                     onChange={(e) => setForm({ ...form, name: e.target.value })}
-                    className="w-full rounded-xl border border-ink-900/10 bg-black/[0.03] px-5 py-4 text-ink-900 placeholder:text-ink-400 transition focus:border-accent-green/50 focus:outline-none focus:ring-2 focus:ring-accent-green/20"
+                    className={inputCls}
                   />
-                  {errors.name && <p className="mt-1 text-xs text-red-400">{errors.name}</p>}
+                  {errors.name && <p className="mt-1 font-mono text-xs text-accent-down">{errors.name}</p>}
                 </div>
 
                 <div>
@@ -196,9 +193,9 @@ export default function Contact() {
                     aria-label={t("contact.formEmail", locale)}
                     value={form.email}
                     onChange={(e) => setForm({ ...form, email: e.target.value })}
-                    className="w-full rounded-xl border border-ink-900/10 bg-black/[0.03] px-5 py-4 text-ink-900 placeholder:text-ink-400 transition focus:border-accent-green/50 focus:outline-none focus:ring-2 focus:ring-accent-green/20"
+                    className={inputCls}
                   />
-                  {errors.email && <p className="mt-1 text-xs text-red-400">{errors.email}</p>}
+                  {errors.email && <p className="mt-1 font-mono text-xs text-accent-down">{errors.email}</p>}
                 </div>
 
                 <div>
@@ -208,18 +205,18 @@ export default function Contact() {
                     rows={5}
                     value={form.message}
                     onChange={(e) => setForm({ ...form, message: e.target.value })}
-                    className="w-full resize-none rounded-xl border border-ink-900/10 bg-black/[0.03] px-5 py-4 text-ink-900 placeholder:text-ink-400 transition focus:border-accent-green/50 focus:outline-none focus:ring-2 focus:ring-accent-green/20"
+                    className={`${inputCls} resize-none`}
                   />
-                  {errors.message && <p className="mt-1 text-xs text-red-400">{errors.message}</p>}
+                  {errors.message && <p className="mt-1 font-mono text-xs text-accent-down">{errors.message}</p>}
                 </div>
 
                 {submitError && (
-                  <div className="rounded-xl border border-red-400/20 bg-red-400/5 p-4 text-center">
-                    <p className="text-sm text-red-400">{submitError}</p>
+                  <div className="border border-accent-down/30 bg-accent-down/5 p-4 text-center">
+                    <p className="text-sm text-accent-down">{submitError}</p>
                     <button
                       type="button"
                       onClick={() => setSubmitError("")}
-                      className="mt-2 text-xs text-ink-500 underline transition hover:text-ink-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-green rounded"
+                      className="mt-2 font-mono text-xs uppercase text-ink-500 underline transition hover:text-ink-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-green"
                     >
                       {t("contact.formRetry", locale)}
                     </button>
@@ -229,7 +226,7 @@ export default function Contact() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full rounded-xl bg-ink-900 px-6 py-4 text-sm font-medium text-paper transition hover:bg-ink-900/90 disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-green focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
+                  className="w-full bg-accent-green px-6 py-4 font-mono text-sm font-semibold uppercase tracking-wider text-paper transition hover:bg-accent-lime disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-green focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
                 >
                   {loading ? t("contact.formSending", locale) : t("contact.formSubmit", locale)}
                 </button>

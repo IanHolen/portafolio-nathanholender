@@ -166,6 +166,33 @@ const translations = {
           "Generé mecanismos y procedimientos estandarizados para optimizar procesos operativos de calidad de datos interna.",
         ],
       },
+      {
+        role: "Marketing & Business Development Intern",
+        company: "Shoplogix Latam",
+        period: "May 2022 — Sep 2022",
+        description:
+          "Prácticas en el equipo de marketing y desarrollo de negocio de Shoplogix, plataforma de analítica de manufactura (OEE). Apoyé la generación de oportunidades comerciales para el mercado de Latinoamérica.",
+        metrics: ["I+D de mercado", "Desarrollo de negocio", "LatAm"],
+        highlights: [
+          "Realicé investigación y desarrollo (I+D) de mercado para identificar oportunidades comerciales en el sector de manufactura en Latinoamérica.",
+          "Preparé y apoyé presentaciones de ventas para prospectos, traduciendo las capacidades técnicas de la plataforma en propuestas de valor claras.",
+          "Colaboré con el equipo de desarrollo de negocio en la generación y calificación de prospectos para el mercado LatAm.",
+        ],
+      },
+      {
+        role: "Consultor de Logística",
+        company: "Coppel S.A. de C.V.",
+        period: "Feb 2021 — Jun 2021",
+        description:
+          "Servicio de consultoría logística para una de las mayores cadenas de retail de México, aplicando metodología Six Sigma sobre las operaciones de sus centros de distribución.",
+        metrics: ["Six Sigma", "Centros de distribución", "Retail"],
+        highlights: [
+          "Apliqué metodología Six Sigma para identificar oportunidades de mejora en las operaciones de los centros de distribución.",
+          "Optimicé costos y tiempos de entrega (lead time) del servicio de entrega a domicilio.",
+          "Desarrollé estrategias logísticas para los procesos de acomodo de prendas.",
+          "Generé soluciones innovadoras para las operaciones de batching (agrupación de pedidos).",
+        ],
+      },
     ],
     en: [
       {
@@ -238,6 +265,33 @@ const translations = {
           "Successfully onboarded international customer experience enhancement projects into the Mexico marketplace, leading cross-border implementation with multiple stakeholders.",
           "Led a team of 3 on a continuous improvement project to enhance the customer journey.",
           "Generated standardized mechanisms and procedures to optimize operational processes for internal data quality.",
+        ],
+      },
+      {
+        role: "Marketing & Business Development Intern",
+        company: "Shoplogix Latam",
+        period: "May 2022 — Sep 2022",
+        description:
+          "Internship with the marketing and business development team at Shoplogix, a manufacturing analytics (OEE) platform. Supported commercial opportunity generation for the Latin American market.",
+        metrics: ["Market R&D", "Business Development", "LatAm"],
+        highlights: [
+          "Conducted market research and development (R&D) to identify commercial opportunities across the manufacturing sector in Latin America.",
+          "Prepared and supported sales presentations for prospects, translating the platform's technical capabilities into clear value propositions.",
+          "Partnered with the business development team on lead generation and qualification for the LatAm market.",
+        ],
+      },
+      {
+        role: "Logistics Consultant",
+        company: "Coppel S.A. de C.V.",
+        period: "Feb 2021 — Jun 2021",
+        description:
+          "Logistics consulting engagement for one of Mexico's largest retail chains, applying Six Sigma methodology across distribution-center operations.",
+        metrics: ["Six Sigma", "Distribution Centers", "Retail"],
+        highlights: [
+          "Applied Six Sigma methodology to identify improvement opportunities across distribution-center operations.",
+          "Optimized home-delivery costs and lead times.",
+          "Developed logistics strategies for clothing arrangement processes.",
+          "Generated innovative solutions for batching operations.",
         ],
       },
     ],

@@ -14,9 +14,9 @@ interface CertText {
 }
 
 const ICONS: Record<string, { Icon: LucideIcon; bg: string }> = {
-  scrum: { Icon: Award, bg: "#17356b" },
+  scrum: { Icon: Award, bg: "#00A8E1" },
   linkedin: { Icon: GraduationCap, bg: "#0A66C2" },
-  community: { Icon: HeartHandshake, bg: "#b4531b" },
+  community: { Icon: HeartHandshake, bg: "#F5B44C" },
 };
 
 export default function Certifications() {
@@ -26,7 +26,7 @@ export default function Certifications() {
   if (!certifications.length) return null;
 
   return (
-    <section className="relative px-6 py-32">
+    <section className="relative px-6 py-28 md:py-36">
       <div className="mx-auto max-w-6xl">
         <SectionHeader
           index="06"
@@ -54,23 +54,23 @@ export default function Certifications() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.6, delay: i * 0.1 }}
-                className={`group flex items-start gap-5 rounded-2xl border border-ink-900/10 bg-card p-6 transition hover:border-ink-900/15 hover:bg-black/[0.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-green focus-visible:ring-offset-2 focus-visible:ring-offset-paper ${
+                className={`group flex items-start gap-5 border border-white/10 bg-card p-6 transition hover:border-accent-green/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-green focus-visible:ring-offset-2 focus-visible:ring-offset-paper ${
                   !cert.credentialUrl ? "cursor-default" : ""
                 }`}
               >
                 <div
-                  className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-paper"
+                  className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md text-paper"
                   style={{ backgroundColor: bg }}
                 >
                   <Icon className="h-5 w-5" strokeWidth={1.9} />
                 </div>
                 <div className="min-w-0 flex-1">
-                  <h3 className="font-medium text-ink-900 transition group-hover:text-accent-green">
+                  <h3 className="text-sm font-semibold text-ink-900 transition group-hover:text-accent-green">
                     {text.title}
                   </h3>
                   <p className="mt-1 text-sm text-ink-500">{text.issuer}</p>
                   {cert.credentialUrl && (
-                    <span className="mt-3 inline-flex items-center gap-1 text-xs text-accent-green/70 transition group-hover:text-accent-green">
+                    <span className="mt-3 inline-flex items-center gap-1 font-mono text-[11px] uppercase tracking-wide text-accent-green/80 transition group-hover:text-accent-green">
                       {t("certs.viewCredential", locale)}
                       <ExternalLink className="h-3 w-3" />
                     </span>

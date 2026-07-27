@@ -17,9 +17,9 @@ export default function OGImage() {
           justifyContent: "space-between",
           padding: 80,
           background:
-            "radial-gradient(ellipse at 22% 18%, rgba(23,53,107,0.10), transparent 55%), radial-gradient(ellipse 120% 90% at 50% -10%, #f7f5ee 0%, #f3f1ea 60%)",
-          color: "#18180f",
-          fontFamily: "Georgia, 'Times New Roman', serif",
+            "radial-gradient(ellipse at 20% 12%, rgba(0,168,225,0.22), transparent 55%), linear-gradient(160deg, #0e1524 0%, #0b0f1a 60%)",
+          color: "#eef3fb",
+          fontFamily: "Arial, Helvetica, sans-serif",
         }}
       >
         <div
@@ -27,28 +27,25 @@ export default function OGImage() {
             display: "flex",
             alignItems: "center",
             gap: 18,
-            fontSize: 26,
-            fontWeight: 600,
-            color: "#5b5747",
-            letterSpacing: 4,
+            fontSize: 24,
+            fontWeight: 700,
+            color: "#8592a8",
+            letterSpacing: 6,
             textTransform: "uppercase",
-            fontFamily: "sans-serif",
           }}
         >
           <div
             style={{
-              width: 64,
-              height: 64,
-              borderRadius: 16,
+              width: 60,
+              height: 60,
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              background: "#18180f",
-              color: "#f3f1ea",
-              fontSize: 30,
-              fontWeight: 600,
+              border: "3px solid #00A8E1",
+              color: "#00A8E1",
+              fontSize: 26,
+              fontWeight: 800,
               letterSpacing: -2,
-              fontFamily: "Georgia, 'Times New Roman', serif",
             }}
           >
             NH
@@ -56,31 +53,31 @@ export default function OGImage() {
           Portafolio
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
           <div
             style={{
-              fontSize: 118,
-              lineHeight: 0.94,
-              fontWeight: 500,
-              letterSpacing: -5,
+              fontSize: 132,
+              lineHeight: 0.9,
+              fontWeight: 800,
+              letterSpacing: -6,
+              textTransform: "uppercase",
               display: "flex",
               flexDirection: "column",
             }}
           >
-            <span style={{ color: "#18180f" }}>Nathan</span>
-            <span style={{ color: "#a8a494" }}>Holender</span>
+            <span style={{ color: "#eef3fb" }}>Nathan</span>
+            <span style={{ color: "#00A8E1" }}>Holender</span>
           </div>
           <div
             style={{
-              fontSize: 33,
-              color: "#5b5747",
-              fontFamily: "sans-serif",
-              marginTop: 22,
-              maxWidth: 860,
+              fontSize: 30,
+              color: "#aeb9cc",
+              marginTop: 26,
+              maxWidth: 900,
               lineHeight: 1.35,
             }}
           >
-            Production &amp; Operations Manager en Prime Video International —
+            Production &amp; Operations Manager — Prime Video International —
             operaciones de producción y campañas en LatAm, Europa y Canadá.
           </div>
         </div>
@@ -90,15 +87,14 @@ export default function OGImage() {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            fontSize: 22,
-            color: "#8a8676",
-            fontFamily: "sans-serif",
-            letterSpacing: 2,
+            fontSize: 20,
+            color: "#69768c",
+            letterSpacing: 3,
             textTransform: "uppercase",
           }}
         >
           <span>Ciudad de México</span>
-          <span>Amazon · Prime Video</span>
+          <span style={{ color: "#00A8E1" }}>Amazon · Prime Video</span>
         </div>
       </div>
     ),

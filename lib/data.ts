@@ -82,6 +82,28 @@ export const experience: ExperienceMeta[] = [
       "Team Leadership",
     ],
   },
+  {
+    company: "Shoplogix Latam",
+    logos: ["/companies/shoplogix.png"],
+    stack: [
+      "Market Research",
+      "Business Development",
+      "Sales Enablement",
+      "Lead Generation",
+      "Go-to-Market",
+    ],
+  },
+  {
+    company: "Coppel S.A. de C.V.",
+    logos: ["/companies/coppel.png"],
+    stack: [
+      "Logistics Consulting",
+      "Six Sigma / DMAIC",
+      "Process Optimization",
+      "Distribution Center Ops",
+      "Lead-Time Reduction",
+    ],
+  },
 ];
 
 /* ─── Logros e impacto (carrusel) ───
