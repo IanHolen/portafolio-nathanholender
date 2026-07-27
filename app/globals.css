@@ -1,0 +1,174 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #f3f1ea;
+  --fg: #18180f;
+  --font-inter: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-fraunces: "Fraunces Variable", ui-serif, Georgia, serif;
+  --font-jetbrains: "JetBrains Mono Variable", ui-monospace, Menlo, monospace;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  background: var(--bg);
+  color: var(--fg);
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+/* Warm paper base with a whisper of warmth at the top */
+body {
+  background: radial-gradient(ellipse 120% 80% at 50% -10%, #f7f5ee 0%, #f3f1ea 55%) no-repeat;
+  background-color: #f3f1ea;
+  color: var(--fg);
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(23, 53, 107, 0.16);
+  color: #18180f;
+}
+
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(100deg, #18180f 0%, #6a6a5c 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .text-gradient-warm {
+    background: linear-gradient(100deg, #18180f 0%, #17356b 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .glass {
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(24, 24, 15, 0.08);
+  }
+
+  .border-gradient {
+    position: relative;
+  }
+
+  .border-gradient::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(23, 53, 107, 0.4), rgba(23, 53, 107, 0.12) 50%, rgba(23, 53, 107, 0) 100%);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+
+  .magnetic {
+    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    will-change: transform;
+  }
+
+  .border-glow {
+    position: relative;
+  }
+
+  .border-glow::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: conic-gradient(
+      from var(--glow-angle, 0deg),
+      rgba(23, 53, 107, 0.5),
+      rgba(23, 53, 107, 0.25),
+      rgba(23, 53, 107, 0) 50%,
+      rgba(23, 53, 107, 0.25),
+      rgba(23, 53, 107, 0.5)
+    );
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    animation: glow-spin 3s linear infinite;
+  }
+
+  .group:hover > .border-glow::before,
+  .border-glow:hover::before {
+    opacity: 1;
+  }
+}
+
+@keyframes glow-spin {
+  to {
+    --glow-angle: 360deg;
+  }
+}
+
+@property --glow-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+/* reduced-motion: disable animations for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-marquee {
+    animation: none !important;
+  }
+
+  /* Projects marquee: no auto-motion, but keep every card reachable by manual swipe */
+  .projects-marquee-track {
+    animation: none !important;
+    transform: none !important;
+  }
+  .projects-marquee-wrap {
+    overflow-x: auto !important;
+  }
+}
+
+/* hide native cursor on devices where custom cursor is active */
+@media (hover: hover) and (pointer: fine) {
+  html.has-custom-cursor,
+  html.has-custom-cursor * {
+    cursor: none !important;
+  }
+}
+
+@media print {
+  body::before, .pointer-events-none, canvas, .animate-marquee { display: none !important; }
+  * { color: black !important; background: white !important; border-color: #ddd !important; }
+  section { break-inside: avoid; padding: 1rem 0 !important; }
+  .font-display { font-style: normal !important; }
+  a[href]::after { content: " (" attr(href) ")"; font-size: 0.8em; color: #666 !important; }
+}
