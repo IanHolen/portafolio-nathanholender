@@ -10,7 +10,7 @@ import Providers from "@/components/Providers";
 import SkipLink from "@/components/SkipLink";
 
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://nathanholender.vercel.app";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://nathanholender.com";
 
 const SITE_TITLE = "Nathan Holender — Production & Operations Manager";
 const SITE_DESCRIPTION =
