@@ -9,18 +9,24 @@ export const profile = {
   email: "nathanholender@gmail.com",
   phone: "+52 55 2492 9029",
   cvUrl: "/cv-nathan-holender.pdf",
+  whatsapp: "525524929029",
   socials: [
     { label: "LinkedIn", href: "https://www.linkedin.com/in/nathan-holender/" },
     { label: "Email", href: "mailto:nathanholender@gmail.com" },
+    { label: "WhatsApp", href: "https://wa.me/525524929029" },
+    { label: "Contacto", href: "#contact" },
   ],
 };
 
 /* ─── Empresas (strip de credibilidad en el Hero) ─── */
 export const companies = [
-  { name: "Amazon", logos: ["/companies/amazon.webp"] },
-  { name: "Prime Video", logos: ["/companies/primevideo.png"] },
-  { name: "Coppel", logos: ["/companies/coppel.png"] },
-  { name: "Shoplogix", logos: ["/companies/shoplogix.png"] },
+  // Prime Video primero: es donde trabaja actualmente.
+  // Los logos que ya vienen como mosaico de marca (fondo de color propio)
+  // se marcan con `tile` para pintarlos completos, sin chip blanco.
+  { name: "Prime Video", logos: ["/companies/primevideo-tile.webp"], tile: true },
+  { name: "Amazon", logos: ["/companies/amazon.webp"], tile: false },
+  { name: "Shoplogix", logos: ["/companies/shoplogix.png"], tile: false },
+  { name: "Coppel", logos: ["/companies/coppel-tile.png"], tile: true },
 ];
 
 /* ─── Experiencia ───
@@ -31,12 +37,30 @@ export type ExperienceMeta = {
   company: string;
   logos: string[];
   stack: string[];
+  /** Empleador al que pertenece el rol — agrupa la línea de tiempo. */
+  group: string;
 };
+
+/* Cada empleador se muestra una vez, con su logo grande, y debajo cuelgan
+   sus roles. El id cruza con ExperienceMeta.group. */
+export type ExperienceGroup = {
+  id: string;
+  name: string;
+  logo: string;
+  tile: boolean;
+};
+
+export const experienceGroups: ExperienceGroup[] = [
+  { id: "amazon", name: "Amazon", logo: "/companies/amazon.webp", tile: false },
+  { id: "shoplogix", name: "Shoplogix Latam", logo: "/companies/shoplogix.png", tile: false },
+  { id: "coppel", name: "Coppel S.A. de C.V.", logo: "/companies/coppel-tile.png", tile: true },
+];
 
 export const experience: ExperienceMeta[] = [
   {
     company: "Amazon · Prime Video International",
-    logos: ["/companies/amazon.webp", "/companies/primevideo.png"],
+    group: "amazon",
+    logos: ["/companies/amazon.webp", "/companies/primevideo-tile.webp"],
     stack: [
       "Production Operations",
       "Stakeholder Management",
@@ -48,6 +72,7 @@ export const experience: ExperienceMeta[] = [
   },
   {
     company: "Amazon",
+    group: "amazon",
     logos: ["/companies/amazon.webp"],
     stack: [
       "Vendor Management",
@@ -60,6 +85,7 @@ export const experience: ExperienceMeta[] = [
   },
   {
     company: "Amazon",
+    group: "amazon",
     logos: ["/companies/amazon.webp"],
     stack: [
       "Campaign Strategy",
@@ -72,6 +98,7 @@ export const experience: ExperienceMeta[] = [
   },
   {
     company: "Amazon",
+    group: "amazon",
     logos: ["/companies/amazon.webp"],
     stack: [
       "Product Management",
@@ -84,6 +111,7 @@ export const experience: ExperienceMeta[] = [
   },
   {
     company: "Shoplogix Latam",
+    group: "shoplogix",
     logos: ["/companies/shoplogix.png"],
     stack: [
       "Market Research",
@@ -95,7 +123,8 @@ export const experience: ExperienceMeta[] = [
   },
   {
     company: "Coppel S.A. de C.V.",
-    logos: ["/companies/coppel.png"],
+    group: "coppel",
+    logos: ["/companies/coppel-tile.png"],
     stack: [
       "Logistics Consulting",
       "Six Sigma / DMAIC",
@@ -122,56 +151,96 @@ export const achievements: Achievement[] = [
     tags: ["Prime Video", "TVOD", "Operations"],
     year: "2025",
     company: "Amazon · Prime Video",
-    accent: "from-blue-600/25 to-sky-500/5",
+    accent: "from-rose-600/20 to-rose-500/5",
   },
   {
     id: "process-standardization",
     tags: ["Process Design", "EU + LatAm", "Documentación"],
     year: "2025",
     company: "Amazon · Prime Video",
-    accent: "from-sky-600/25 to-blue-500/5",
+    accent: "from-orange-600/20 to-amber-500/5",
   },
   {
     id: "rush-rate",
     tags: ["Workflow", "Eficiencia", "Planeación"],
     year: "2025",
     company: "Amazon · Prime Video",
-    accent: "from-blue-600/25 to-indigo-500/5",
+    accent: "from-rose-600/20 to-amber-500/5",
   },
   {
     id: "music-partnership",
     tags: ["Amazon Music", "Live Events", "Cross-functional"],
     year: "2025",
     company: "Amazon · Prime Video",
-    accent: "from-indigo-600/25 to-blue-500/5",
+    accent: "from-rose-600/20 to-amber-500/5",
   },
   {
     id: "gms-growth",
     tags: ["P&L", "Vendor Management", "Retail"],
     year: "2024",
     company: "Amazon",
-    accent: "from-amber-600/25 to-orange-500/5",
+    accent: "from-amber-600/20 to-amber-500/5",
   },
   {
     id: "po-automation",
     tags: ["Automatización", "Supply Chain", "Catálogo"],
     year: "2024",
     company: "Amazon",
-    accent: "from-blue-600/25 to-sky-500/5",
+    accent: "from-rose-600/20 to-rose-500/5",
   },
   {
     id: "ctr-campaigns",
     tags: ["Marketing", "CTR", "Q4 Peak"],
     year: "2024",
     company: "Amazon",
-    accent: "from-sky-600/25 to-blue-500/5",
+    accent: "from-orange-600/20 to-amber-500/5",
   },
   {
     id: "return-rate",
     tags: ["Product", "Size & Fit", "CX"],
     year: "2023",
     company: "Amazon",
-    accent: "from-blue-600/25 to-indigo-500/5",
+    accent: "from-rose-600/20 to-amber-500/5",
+  },
+];
+
+/* ─── Campañas / trabajo destacado (texto en translations → "featured.items") ─── */
+export type Campaign = {
+  id: string;
+  year: string;
+  org: string;
+  tags: string[];
+  accent: string;
+};
+
+export const campaigns: Campaign[] = [
+  {
+    id: "vivelatino",
+    year: "2025",
+    org: "Amazon Music × Prime Video",
+    tags: ["Live Events", "Cross-functional", "Streaming"],
+    accent: "from-rose-500/25 to-orange-500/5",
+  },
+  {
+    id: "tvod-standardization",
+    year: "2025",
+    org: "Prime Video International",
+    tags: ["Process Design", "EU + LatAm", "Workflow"],
+    accent: "from-orange-500/25 to-amber-500/5",
+  },
+  {
+    id: "asset-scale",
+    year: "2025",
+    org: "Prime Video International",
+    tags: ["Operations", "TVOD & Channels"],
+    accent: "from-amber-500/25 to-rose-500/5",
+  },
+  {
+    id: "workflow-opt",
+    year: "2025",
+    org: "Prime Video International",
+    tags: ["Efficiency", "Planning"],
+    accent: "from-rose-500/25 to-amber-500/5",
   },
 ];
 
@@ -244,7 +313,8 @@ export const education = [
    Vacío = la sección se auto-oculta (texto en translations → "certs.items"). */
 export const certifications: { icon: string; credentialUrl: string }[] = [
   { icon: "scrum", credentialUrl: "" },
-  { icon: "linkedin", credentialUrl: "" },
+  { icon: "linkedin", credentialUrl: "/certs/cadena-suministro-operaciones.jpg" },
+  { icon: "linkedin", credentialUrl: "/certs/bases-cadena-suministro.jpg" },
   { icon: "community", credentialUrl: "" },
 ];
 

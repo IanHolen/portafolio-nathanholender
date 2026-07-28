@@ -83,7 +83,7 @@ export async function POST(req: NextRequest) {
       replyTo: email,
       html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #17356b;">Nuevo mensaje desde tu portafolio</h2>
+          <h2 style="color: #9c3d2e;">Nuevo mensaje desde tu portafolio</h2>
           <p><strong>Nombre:</strong> ${escapeHtml(name)}</p>
           <p><strong>Email:</strong> ${escapeHtml(email)}</p>
           <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;" />

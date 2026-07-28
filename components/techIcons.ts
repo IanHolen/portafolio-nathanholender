@@ -29,11 +29,10 @@ import {
 
 export type SkillMeta = { Icon: LucideIcon; color: string };
 
-// Tuned for the dark "Cine + Ops" theme so glyphs stay legible on #0B0F1A.
-const NAVY = "#54D6F6"; // light cyan
-const STEEL = "#37C4EC"; // mid cyan
-const EMBER = "#F5B44C"; // warm amber
-const SLATE = "#8592a8"; // muted steel
+const NAVY = "#9c3d2e";
+const STEEL = "#b5553f";
+const EMBER = "#a67c3a";
+const SLATE = "#5a5a4d";
 
 /** Las claves deben coincidir exactamente con skills.groups[].items de lib/data.ts */
 export const SKILL_ICONS: Record<string, SkillMeta> = {

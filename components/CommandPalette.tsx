@@ -9,7 +9,6 @@ import {
   Briefcase,
   TrendingUp,
   Wrench,
-  GraduationCap,
   Mail,
   Copy,
   ExternalLink,
@@ -53,7 +52,6 @@ export default function CommandPalette() {
     { id: "experience", label: t("cmd.experience", locale), icon: <Briefcase className="h-4 w-4" />, action: () => navigate("#experience") },
     { id: "achievements", label: t("cmd.achievements", locale), icon: <TrendingUp className="h-4 w-4" />, action: () => navigate("#achievements") },
     { id: "skills", label: t("cmd.skills", locale), icon: <Wrench className="h-4 w-4" />, action: () => navigate("#skills") },
-    { id: "education", label: t("cmd.education", locale), icon: <GraduationCap className="h-4 w-4" />, action: () => navigate("#education") },
     { id: "contact", label: t("cmd.contact", locale), icon: <Mail className="h-4 w-4" />, action: () => navigate("#contact") },
     ...achievements.map((a, i) => ({
       id: `achievement-${a.id}`,

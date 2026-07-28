@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 // Fuentes variables self-hosted (sin fetch externo — funciona offline y en Vercel)
 import "@fontsource-variable/inter";
 import "@fontsource-variable/jetbrains-mono";
-import "@fontsource-variable/archivo";
+import "@fontsource-variable/playfair-display";
 import "./globals.css";
 import CommandPalette from "@/components/CommandPalette";
 import ReadingProgress from "@/components/ReadingProgress";
@@ -55,8 +55,8 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0b0f1a",
-  colorScheme: "dark",
+  themeColor: "#f4efe4",
+  colorScheme: "light",
 };
 
 // Script inline: fija el idioma desde localStorage antes del primer paint.
@@ -75,8 +75,6 @@ export default function RootLayout({
       <body className="font-sans selection:bg-accent-green/30">
         <Providers>
           <SkipLink />
-          <div className="pointer-events-none fixed inset-0 -z-10 bg-radial-fade" />
-          <div className="pointer-events-none fixed inset-0 -z-10 bg-grid-pattern [background-size:64px_64px] opacity-60 [mask-image:radial-gradient(ellipse_at_center,black,transparent_75%)]" />
           <ReadingProgress />
           <CommandPalette />
           {children}

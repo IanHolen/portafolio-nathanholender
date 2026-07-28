@@ -8,28 +8,34 @@ type Props = {
   kicker?: string;
 };
 
-/* "Run-sheet" header: a monospace section code + hairline rule, then a
-   poster-scale Archivo title. Deliberately technical / operational. */
+/* Cabecera estilo "revista": folio N.º + regla hairline + kicker en mono,
+   y un título grande en Playfair. Voz editorial premium, distinta a la base. */
 export default function SectionHeader({ index, title, kicker }: Props) {
   return (
     <div className="mb-14 md:mb-16">
       <motion.div
-        initial={{ opacity: 0, y: 12 }}
+        initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.6 }}
-        className="flex items-center gap-4 font-mono text-[11px] uppercase tracking-[0.32em] text-accent-green"
+        className="flex items-center gap-4"
       >
-        <span className="text-accent-green/90">S{index}</span>
-        <span className="h-px flex-1 bg-gradient-to-r from-accent-green/40 via-ink-900/12 to-transparent" />
-        {kicker && <span className="shrink-0 text-ink-500">{kicker}</span>}
+        <span className="font-mono text-xs tracking-[0.28em] text-accent-green">
+          N.º {index}
+        </span>
+        <span className="h-px flex-1 bg-ink-900/12" />
+        {kicker && (
+          <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-ink-500">
+            {kicker}
+          </span>
+        )}
       </motion.div>
       <motion.h2
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.7, delay: 0.05 }}
-        className="mt-5 font-display text-[clamp(2.4rem,6vw,4.5rem)] font-extrabold uppercase leading-[0.95] tracking-poster text-ink-900"
+        className="mt-6 font-display text-[clamp(2.4rem,5.5vw,4.5rem)] font-medium leading-[1.02] tracking-tight text-ink-900"
       >
         {title}
       </motion.h2>

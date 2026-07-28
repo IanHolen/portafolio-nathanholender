@@ -22,10 +22,11 @@ export default function Education() {
   const languageItems = tArray<LangItem>("languages.items", locale);
 
   return (
-    <section id="education" className="relative px-6 py-28 md:py-36">
+    <section id="education" className="relative px-6 py-32">
+      <div className="pointer-events-none absolute -left-40 top-1/4 h-[380px] w-[380px] rounded-full bg-accent-green/10 blur-[140px]" />
       <div className="mx-auto max-w-6xl">
         <SectionHeader
-          index="05"
+          index="06"
           kicker={t("education.kicker", locale)}
           title={t("education.title", locale)}
         />
@@ -39,10 +40,10 @@ export default function Education() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.6, delay: i * 0.1 }}
-                className="flex items-start gap-5 border border-white/10 bg-card p-6 transition hover:border-accent-green/30 md:p-7"
+                className="flex items-start gap-5 rounded-2xl border border-ink-900/10 bg-card p-6 transition hover:border-ink-900/15 md:p-7"
               >
                 {education[i]?.logo && (
-                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-md bg-white p-2">
+                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-ink-900/10 bg-paper p-2">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={education[i].logo}
@@ -52,23 +53,23 @@ export default function Education() {
                   </div>
                 )}
                 <div className="min-w-0">
-                  <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink-500">
+                  <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-ink-500">
                     {ed.period}
                   </p>
-                  <h3 className="mt-2 font-display text-xl font-bold uppercase leading-tight tracking-poster text-ink-900 md:text-2xl">
+                  <h3 className="mt-2 font-display text-2xl font-light leading-tight text-ink-900">
                     {ed.title}
                   </h3>
-                  <p className="mt-1.5 text-sm text-ink-600">{ed.institution}</p>
+                  <p className="mt-1 text-ink-600">{ed.institution}</p>
                 </div>
               </motion.div>
             ))}
           </div>
 
           <div className="md:col-span-4">
-            <div className="mb-6 font-mono text-[10px] uppercase tracking-[0.28em] text-accent-green">
+            <div className="mb-6 font-mono text-[11px] uppercase tracking-[0.3em] text-accent-green">
               {t("languages.kicker", locale)}
             </div>
-            <div className="space-y-0 border-t border-white/10">
+            <div className="space-y-4">
               {languageItems.map((lang, i) => (
                 <motion.div
                   key={lang.name}
@@ -76,12 +77,12 @@ export default function Education() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-60px" }}
                   transition={{ duration: 0.6, delay: i * 0.1 }}
-                  className="flex items-baseline justify-between gap-4 border-b border-white/10 py-4"
+                  className="flex items-baseline justify-between gap-4 border-b border-ink-900/10 pb-4"
                 >
-                  <span className="font-display text-lg font-bold uppercase tracking-poster text-ink-900">
+                  <span className="font-display text-2xl text-ink-900">
                     {lang.name}
                   </span>
-                  <span className="text-right font-mono text-[11px] uppercase tracking-wide text-ink-500">
+                  <span className="text-right text-sm text-ink-500">
                     {lang.level}
                   </span>
                 </motion.div>

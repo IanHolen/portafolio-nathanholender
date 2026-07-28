@@ -25,7 +25,7 @@ export default function BackToTop() {
           exit={{ opacity: 0, scale: 0.8 }}
           transition={{ duration: 0.2 }}
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="fixed bottom-8 right-8 z-40 flex h-10 w-10 items-center justify-center border border-white/10 bg-panel/80 text-ink-600 backdrop-blur transition hover:border-accent-green/50 hover:text-accent-green focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-green"
+          className="fixed bottom-8 right-8 z-40 flex h-10 w-10 items-center justify-center rounded-full border border-ink-900/10 bg-black/[0.04] text-ink-600 backdrop-blur transition hover:bg-black/[0.06] hover:text-ink-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-green"
           aria-label={t("backToTop", locale)}
         >
           <ChevronUp className="h-5 w-5" />

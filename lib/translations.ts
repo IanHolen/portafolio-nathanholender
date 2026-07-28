@@ -4,6 +4,7 @@ const translations = {
   // ─── Navbar ───
   "nav.about": { es: "Sobre mí", en: "About" },
   "nav.experience": { es: "Experiencia", en: "Experience" },
+  "nav.featured": { es: "Campañas", en: "Work" },
   "nav.achievements": { es: "Logros", en: "Impact" },
   "nav.skills": { es: "Skills", en: "Skills" },
   "nav.education": { es: "Educación", en: "Education" },
@@ -88,7 +89,7 @@ const translations = {
 
   // ─── Experiencia ───
   "experience.kicker": { es: "Experiencia", en: "Experience" },
-  "experience.title": { es: "Dónde he operado.", en: "Where I've operated." },
+  "experience.title": { es: "Experiencia laboral.", en: "Work experience." },
   "experience.expand": { es: "Ver más detalle", en: "See more detail" },
   "experience.collapse": { es: "Ocultar detalle", en: "Hide detail" },
   "experience.stackLabel": { es: "Competencias", en: "Competencies" },
@@ -298,8 +299,73 @@ const translations = {
   },
 
   // ─── Logros e impacto ───
+  // ─── Campañas destacadas ───
+  "featured.kicker": { es: "Campañas & proyectos", en: "Campaigns & projects" },
+  "featured.title": { es: "Trabajo destacado.", en: "Selected work." },
+  "featured.items": {
+    es: [
+      {
+        title: "Vive Latino × Bad Bunny — Livestream",
+        figure: "9M+",
+        unit: "espectadores en vivo",
+        blurb:
+          "Enlace principal entre Amazon Music y Prime Video para el livestream de Vive Latino 2025 y Bad Bunny, coordinando la entrega cross-functional en vivo.",
+      },
+      {
+        title: "Estandarización del proceso TVOD",
+        figure: "2",
+        unit: "regiones unificadas",
+        blurb:
+          "Tras la integración de marketing de PVI entre Europa y LatAm/Canadá, redacté el documento unificado de workflow y alineé a agencia, marketing y partner managers.",
+      },
+      {
+        title: "Producción de assets a escala",
+        figure: "51,294",
+        unit: "assets · +70.4% YoY",
+        blurb:
+          "Escalé la producción de assets de TVOD y Channels soportando 1,184 campañas a través de Latinoamérica, Europa y Canadá, sin sacrificar precisión.",
+      },
+      {
+        title: "Optimización del flujo de producción",
+        figure: "3.9%",
+        unit: "rush rate · desde 5.0%",
+        blurb:
+          "Rediseño de la planeación para reducir urgencias de última hora, con ~10% menos desperdicio estandarizando plantillas y paquetes del marketplace.",
+      },
+    ],
+    en: [
+      {
+        title: "Vive Latino × Bad Bunny — Livestream",
+        figure: "9M+",
+        unit: "live viewers",
+        blurb:
+          "Primary liaison between Amazon Music and Prime Video for the Vive Latino 2025 and Bad Bunny livestream, coordinating cross-functional live delivery.",
+      },
+      {
+        title: "TVOD process standardization",
+        figure: "2",
+        unit: "regions unified",
+        blurb:
+          "After the PVI marketing integration between EU and LatAm/Canada, I authored the unified workflow document and aligned the agency, marketing, and partner managers.",
+      },
+      {
+        title: "Asset production at scale",
+        figure: "51,294",
+        unit: "assets · +70.4% YoY",
+        blurb:
+          "Scaled TVOD and Channels asset production supporting 1,184 campaigns across Latin America, Europe, and Canada — with no loss of accuracy.",
+      },
+      {
+        title: "Production workflow optimization",
+        figure: "3.9%",
+        unit: "rush rate · down from 5.0%",
+        blurb:
+          "Redesigned planning to cut last-minute rushes, with ~10% less waste by standardizing marketplace templates and asset packages.",
+      },
+    ],
+  },
   "achievements.kicker": { es: "Logros e impacto", en: "Impact" },
-  "achievements.title": { es: "Los números.", en: "The numbers." },
+  "achievements.title": { es: "Impacto medible.", en: "Measurable impact." },
   "achievements.scrollLeft": { es: "Anterior", en: "Previous" },
   "achievements.scrollRight": { es: "Siguiente", en: "Next" },
   "achievements.swipeHint": { es: "Desliza para ver más", en: "Swipe to see more" },
@@ -408,21 +474,21 @@ const translations = {
 
   // ─── Skills ───
   "skills.kicker": { es: "Capacidades", en: "Capabilities" },
-  "skills.title": { es: "Cómo trabajo.", en: "How I work." },
+  "skills.title": { es: "Stack operativo.", en: "Operating stack." },
   "skills.groups": {
     es: [
       "Operaciones & Producción",
       "Comercial & Marketing",
       "Datos & Análisis",
       "Gestión de Programas",
-      "Herramientas",
+      "Herramientas que domino",
     ],
     en: [
       "Operations & Production",
       "Commercial & Marketing",
       "Data & Analysis",
       "Program Management",
-      "Tools",
+      "Tools I master",
     ],
   },
   "skills.interests": {
@@ -486,21 +552,23 @@ const translations = {
   },
 
   // ─── Extracurriculares ───
-  "certs.kicker": { es: "Extracurriculares", en: "Extra-curricular" },
-  "certs.title": { es: "Y además.", en: "Beyond the role." },
+  "certs.kicker": { es: "Formación continua", en: "Continuous learning" },
+  "certs.title": { es: "Certificaciones.", en: "Certifications." },
   "certs.viewCredential": { es: "Ver credencial", en: "View credential" },
   "certs.items": {
     es: [
-      { title: "Scrum Foundation", issuer: "Certificado en metodología Scrum" },
-      { title: "Supply Chain Management", issuer: "LinkedIn Learning" },
+      { title: "Scrum Foundation", issuer: "CertiProf · ID 86030236" },
+      { title: "Cadena de suministro y operaciones", issuer: "LinkedIn Learning · Jun 2023" },
+      { title: "Aprende las bases de las cadenas de suministro", issuer: "LinkedIn Learning · Jun 2023" },
       {
         title: "Servicio Social — Investigación",
         issuer: "Fundación Tierra de Artistas",
       },
     ],
     en: [
-      { title: "Scrum Foundation", issuer: "Scrum methodology certificate" },
-      { title: "Supply Chain Management", issuer: "LinkedIn Learning" },
+      { title: "Scrum Foundation", issuer: "CertiProf · ID 86030236" },
+      { title: "Supply Chain & Operations Job Skills", issuer: "LinkedIn Learning · Jun 2023" },
+      { title: "Supply Chain Foundations", issuer: "LinkedIn Learning · Jun 2023" },
       {
         title: "Social Service — Research",
         issuer: "Fundación Tierra de Artistas",
@@ -518,6 +586,18 @@ const translations = {
   },
   "contact.copyEmail": { es: "Copiar email", en: "Copy email" },
   "contact.copied": { es: "Copiado", en: "Copied" },
+  "contact.waGreeting": {
+    es: "Hola Nathan, vi tu portafolio y me gustaría platicar contigo.",
+    en: "Hi Nathan, I saw your portfolio and I'd love to talk.",
+  },
+  "contact.methodLabel": {
+    es: "¿Cómo prefieres escribirme?",
+    en: "How would you rather reach me?",
+  },
+  "contact.methodEmail": { es: "Email", en: "Email" },
+  "contact.methodWhatsapp": { es: "WhatsApp", en: "WhatsApp" },
+  "contact.waSubmit": { es: "Enviar por WhatsApp", en: "Send via WhatsApp" },
+  "contact.emailSubmit": { es: "Enviar email", en: "Send email" },
   "contact.formName": { es: "Nombre", en: "Name" },
   "contact.formEmail": { es: "Email", en: "Email" },
   "contact.formMessage": { es: "Mensaje", en: "Message" },

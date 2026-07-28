@@ -14,14 +14,14 @@ export default function AppleIcon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: "#0b0f1a",
+          backgroundColor: "#18180f",
           backgroundImage:
-            "radial-gradient(circle at 30% 25%, rgba(0,168,225,0.45), transparent 62%)",
-          color: "#eef3fb",
-          fontSize: 88,
-          fontWeight: 800,
-          fontFamily: "Arial, Helvetica, sans-serif",
-          letterSpacing: -4,
+            "radial-gradient(circle at 30% 25%, rgba(156,61,46,0.40), transparent 62%)",
+          color: "#f3f1ea",
+          fontSize: 92,
+          fontWeight: 500,
+          fontFamily: "Georgia, 'Times New Roman', serif",
+          letterSpacing: -3,
         }}
       >
         NH

@@ -9,42 +9,48 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // ── "Cine + Ops" dark base ──
-        // Deep blue-black canvas + raised control-panel surfaces.
-        paper: "#0B0F1A", // page canvas
-        card: "#111828", // raised panel / tile
-        panel: "#0E1422", // recessed surface
-        // Text scale inverts the original: higher number = brighter on dark.
-        ink: {
-          950: "#ffffff",
-          900: "#eef3fb", // primary headings / strongest text
-          800: "#d5deec",
-          700: "#aeb9cc", // body copy
-          600: "#8592a8", // secondary
-          500: "#69768c", // muted labels
-          400: "#525d70", // faint
-          300: "#3a4457", // hairlines-as-color
+        // ── Identidad propia: hueso cálido + terracota/oro, con bandas espresso ──
+        paper: "#f4efe4", // lienzo: hueso cálido
+        card: "#fdfaf4", // superficie elevada (tarjetas)
+        // Secciones de contraste: café casi negro para dar ritmo al recorrido
+        espresso: {
+          DEFAULT: "#191411",
+          soft: "#241d18",
+          line: "#3a312a",
         },
-        // Prime Video cyan is the signal color; warm amber is the secondary.
+        // Escala normal: 900 = lo más oscuro (texto principal sobre hueso).
+        ink: {
+          950: "#0d0b09",
+          900: "#1d1815", // títulos / texto principal
+          800: "#2f2822",
+          700: "#4b423a", // cuerpo
+          600: "#6b6055", // secundario
+          500: "#877a6c", // etiquetas mono
+          400: "#a1958a", // tenue pero legible
+          300: "#c9bfb2", // hairlines / bordes
+        },
+        // Texto sobre las bandas oscuras (Trabajo destacado y Contacto).
+        chalk: {
+          DEFAULT: "#faf6ee",
+          700: "#e2d9cc",
+          600: "#c3b7a6",
+          500: "#a2937f",
+          400: "#8a7b68",
+        },
+        // Terracota como acento principal + oro cálido como secundario.
         accent: {
-          green: "#00A8E1", // primary accent (cyan)
-          emerald: "#00A8E1",
-          lime: "#54D6F6",
-          mint: "#37C4EC",
-          cyan: "#00A8E1",
-          orange: "#F5B44C",
-          amber: "#F5B44C",
-          up: "#39D98A", // positive delta
-          down: "#FF6B7D", // negative delta
+          green: "#9c3d2e", // terracota legible sobre hueso
+          emerald: "#9c3d2e",
+          lime: "#c25a43",
+          mint: "#7c2d21",
+          orange: "#c08a2b", // oro para las bandas oscuras
+          amber: "#8a6318", // oro profundo para superficies claras
         },
       },
       fontFamily: {
         sans: ["var(--font-inter)", "ui-sans-serif", "system-ui"],
-        display: ["var(--font-archivo)", "ui-sans-serif", "system-ui"],
+        display: ["var(--font-playfair)", "ui-serif", "Georgia"],
         mono: ["var(--font-jetbrains)", "ui-monospace", "Menlo"],
-      },
-      letterSpacing: {
-        poster: "-0.03em",
       },
       animation: {
         "gradient-x": "gradient-x 8s ease infinite",
@@ -53,7 +59,6 @@ const config: Config = {
         "fade-up": "fade-up 0.8s ease-out forwards",
         shimmer: "shimmer 2.5s linear infinite",
         "pulse-glow": "pulse-glow 4s ease-in-out infinite",
-        scan: "scan 6s linear infinite",
       },
       keyframes: {
         "gradient-x": {
@@ -73,19 +78,15 @@ const config: Config = {
           "100%": { "background-position": "1000px 0" },
         },
         "pulse-glow": {
-          "0%, 100%": { opacity: "0.35" },
+          "0%, 100%": { opacity: "0.4" },
           "50%": { opacity: "0.85" },
-        },
-        scan: {
-          "0%": { transform: "translateY(-100%)" },
-          "100%": { transform: "translateY(100%)" },
         },
       },
       backgroundImage: {
         "grid-pattern":
-          "linear-gradient(to right, rgba(120,170,220,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(120,170,220,0.05) 1px, transparent 1px)",
+          "linear-gradient(to right, rgba(29,24,21,0.035) 1px, transparent 1px), linear-gradient(to bottom, rgba(29,24,21,0.035) 1px, transparent 1px)",
         "radial-fade":
-          "radial-gradient(ellipse at top, rgba(0,168,225,0.12), transparent 60%)",
+          "radial-gradient(ellipse at top, rgba(156,61,46,0.07), transparent 62%)",
       },
     },
   },
