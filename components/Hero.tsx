@@ -53,14 +53,14 @@ function HeroSocial({ label, href }: { label: string; href: string }) {
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       style={hover ? { borderColor: color } : undefined}
-      className="inline-flex w-full items-center justify-center gap-2.5 rounded-full border border-ink-900/15 px-6 py-4 text-base font-medium text-ink-800 transition duration-200 hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-green focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
+      className="inline-flex items-center justify-center gap-2 rounded-full border border-ink-900/15 px-5 py-3.5 text-sm font-medium text-ink-800 transition duration-200 hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-green focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={iconSrc}
         alt=""
         aria-hidden="true"
-        className="h-[22px] w-[22px] shrink-0 rounded-[5px] object-contain"
+        className="h-5 w-5 shrink-0 rounded-[5px] object-contain"
       />
       {label}
     </a>
@@ -229,8 +229,9 @@ export default function Hero() {
     },
   ];
 
+
   return (
-    <section id="top" className="relative flex min-h-screen items-center px-6 pt-32">
+    <section id="top" className="relative px-6 pb-24 pt-32">
       <div className="mx-auto w-full max-w-6xl">
         {/* Masthead editorial */}
         <motion.div
@@ -238,163 +239,85 @@ export default function Hero() {
           animate="visible"
           variants={fadeUp}
           custom={0}
-          className="mb-8 flex items-center justify-between border-b border-ink-900/10 pb-3 font-mono text-[10px] uppercase tracking-[0.3em] text-ink-500"
+          className="mb-10 flex items-center justify-between border-b border-ink-900/10 pb-3 font-mono text-[10px] uppercase tracking-[0.3em] text-ink-500"
         >
           <span>Portafolio</span>
           <span className="text-accent-green">{profile.location}</span>
         </motion.div>
 
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={fadeUp}
-          custom={0.6}
-          className="mb-10 flex flex-wrap items-center gap-4"
-        >
-          <span className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-accent-green">
-            <span className="h-1.5 w-1.5 rounded-full bg-accent-green" />
-            {t("hero.available", locale)}
-          </span>
-        </motion.div>
-
-        <div className="grid gap-12 md:grid-cols-[1.15fr_0.85fr] md:items-stretch lg:gap-16">
-          {/* Identidad + pitch + métricas */}
-          <div>
-            <h1 className="font-display text-[clamp(2.8rem,6.6vw,6rem)] font-medium leading-[0.9] tracking-tight">
-              <SplitText text={profile.firstName} className="block text-ink-900" />
-              <SplitText text={profile.lastName} className="block text-accent-green" />
-            </h1>
-
-            <motion.p
-              initial="hidden"
-              animate="visible"
-              variants={fadeUp}
-              custom={2}
-              className="mt-6 font-mono text-xs uppercase tracking-[0.18em] text-ink-600 sm:text-sm"
-            >
-              {t("hero.role", locale)}
-            </motion.p>
-
-            <motion.p
-              initial="hidden"
-              animate="visible"
-              variants={fadeUp}
-              custom={2.6}
-              className="mt-6 max-w-lg text-lg leading-relaxed text-ink-700"
-            >
-              {t("hero.tagline", locale)}
-            </motion.p>
-
-            <motion.div
-              initial="hidden"
-              animate="visible"
-              variants={fadeUp}
-              custom={3.1}
-              className="mt-8 grid max-w-lg grid-cols-2 gap-x-8 gap-y-6 border-t border-ink-900/10 pt-7"
-            >
-              {stats.map((s) => (
-                <div key={s.key}>
-                  <p className="font-display text-3xl font-medium text-ink-900">
-                    <AnimatedCounter value={s.value} suffix={s.suffix} />
-                  </p>
-                  <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.16em] text-ink-500">
-                    {s.label}
-                  </p>
-                  {STAT_DELTA[s.key] && (
-                    <p className="mt-1 font-mono text-[10px] font-medium tracking-wide text-accent-green">
-                      {STAT_DELTA[s.key]}
-                    </p>
-                  )}
-                </div>
-              ))}
-            </motion.div>
-
-            <motion.div
-              initial="hidden"
-              animate="visible"
-              variants={fadeUp}
-              custom={3.5}
-              className="mt-8 grid max-w-lg grid-cols-2 gap-3.5"
-            >
-              {info.map((it) => (
-                <div
-                  key={it.label}
-                  className="flex h-full flex-col rounded-2xl border border-ink-900/10 bg-card p-5"
-                >
-                  <div className="mb-2.5 flex items-center gap-2 text-accent-green">
-                    <it.Icon className="h-4 w-4" strokeWidth={1.75} />
-                    <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-ink-500">
-                      {it.label}
-                    </span>
-                  </div>
-                  <p className="text-sm font-medium leading-snug text-ink-900">
-                    {it.value}
-                  </p>
-                  {it.sub && (
-                    <p className="mt-1 text-[11px] leading-snug text-ink-500">
-                      {it.sub}
-                    </p>
-                  )}
-                  {it.schools.length > 0 && (
-                    <div className="mt-auto space-y-2 pt-3">
-                      {it.schools.map((s) => (
-                        <div key={s.src} className="flex items-center gap-2">
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img
-                            src={s.src}
-                            alt={s.name}
-                            className="h-5 w-5 shrink-0 object-contain"
-                          />
-                          <span className="text-[11px] leading-snug">
-                            <span className="font-semibold text-ink-800">{s.name}</span>
-                            {s.note && <span className="text-ink-500"> · {s.note}</span>}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ))}
-            </motion.div>
-          </div>
-
-          {/* Retrato */}
+        {/* ── Bloque principal: retrato a la izquierda, identidad a la derecha ── */}
+        <div className="grid gap-10 md:grid-cols-[0.82fr_1.18fr] md:items-end lg:gap-14">
           <motion.div
             initial={{ opacity: 0, scale: 0.96, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.3, ease: [0.2, 0.8, 0.2, 1] }}
-            className="relative mx-auto w-full max-w-[360px] md:h-full md:max-w-none"
+            transition={{ duration: 1, delay: 0.2, ease: [0.2, 0.8, 0.2, 1] }}
+            className="relative order-2 mx-auto w-full max-w-[340px] md:order-1 md:max-w-none"
           >
-            {/* Marco editorial: doble filete + esquinas */}
             <div className="pointer-events-none absolute -inset-2 rounded-[28px] border border-accent-green/25" />
-            <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border border-ink-900/15 bg-card shadow-[0_34px_70px_-42px_rgba(29,24,21,0.45)] md:aspect-auto md:h-full md:min-h-[520px]">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border border-ink-900/15 bg-card shadow-[0_34px_70px_-42px_rgba(29,24,21,0.45)]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/nathan-portrait.png"
                 alt={`${profile.firstName} ${profile.lastName}`}
                 className="absolute inset-0 h-full w-full object-cover object-top"
               />
-              {/* Caption estilo revista */}
               <div className="absolute inset-x-0 bottom-0 flex items-center justify-between bg-gradient-to-t from-black/75 to-transparent px-4 py-3 font-mono text-[10px] uppercase tracking-[0.2em] text-white/90">
-                <span>{profile.firstName} {profile.lastName}</span>
+                <span>
+                  {profile.firstName} {profile.lastName}
+                </span>
                 <span>PVI · AMZN</span>
               </div>
             </div>
           </motion.div>
-        </div>
 
-        {/* CTA + accesos directos */}
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={fadeUp}
-          custom={3.9}
-          className="mt-14 md:mt-16"
-        >
-          {/* Misma rejilla que el bloque de arriba: la columna derecha queda
-              exactamente bajo el retrato, así los accesos alinean con la foto. */}
-          <div className="grid gap-8 md:grid-cols-[1.15fr_0.85fr] md:items-center lg:gap-16">
-            <div className="flex flex-wrap items-center gap-3">
+          <div className="order-1 md:order-2">
+            <motion.span
+              initial="hidden"
+              animate="visible"
+              variants={fadeUp}
+              custom={0.4}
+              className="inline-flex items-center gap-2 rounded-full border border-accent-green/25 bg-accent-green/[0.07] px-4 py-1.5 font-mono text-[11px] uppercase tracking-[0.2em] text-accent-green"
+            >
+              <span className="h-1.5 w-1.5 rounded-full bg-accent-green" />
+              {t("hero.available", locale)}
+            </motion.span>
+
+            <h1 className="mt-7 font-display text-[clamp(3rem,7.4vw,6.6rem)] font-medium leading-[0.88] tracking-tight">
+              <SplitText text={profile.firstName} className="block text-ink-900" />
+              <SplitText text={profile.lastName} className="block text-accent-green" />
+            </h1>
+
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={fadeUp}
+              custom={2}
+              className="mt-7 flex items-center gap-4"
+            >
+              <span className="h-px w-10 shrink-0 bg-accent-green/50" />
+              <p className="font-mono text-xs uppercase tracking-[0.18em] text-ink-600 sm:text-sm">
+                {t("hero.role", locale)}
+              </p>
+            </motion.div>
+
+            <motion.p
+              initial="hidden"
+              animate="visible"
+              variants={fadeUp}
+              custom={2.6}
+              className="mt-6 max-w-xl text-lg leading-relaxed text-ink-700"
+            >
+              {t("hero.tagline", locale)}
+            </motion.p>
+
+            {/* Todas las acciones en una sola fila, bajo el texto */}
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={fadeUp}
+              custom={3.1}
+              className="mt-9 flex flex-wrap items-center gap-2.5"
+            >
               <MagneticWrap>
                 <a
                   href="#achievements"
@@ -408,16 +331,12 @@ export default function Hero() {
                 <a
                   href={profile.cvUrl}
                   download
-                  className="group inline-flex items-center gap-2 rounded-full border border-ink-900/15 px-6 py-3.5 text-sm text-ink-800 transition hover:border-ink-900/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-green focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
+                  className="group inline-flex items-center gap-2 rounded-full border border-ink-900/15 px-5 py-3.5 text-sm text-ink-800 transition hover:border-ink-900/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-green focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
                 >
                   <Download className="h-4 w-4 transition group-hover:translate-y-0.5" />
                   {t("hero.downloadCv", locale)}
                 </a>
               </MagneticWrap>
-            </div>
-            {/* Solo LinkedIn y Contacto: WhatsApp y Email viven abajo, en Contacto.
-                Ocupan el ancho de la columna para calzar con los bordes del retrato. */}
-            <div className="grid grid-cols-2 gap-3">
               {profile.socials
                 .filter((s) => {
                   const l = s.label.toLowerCase();
@@ -426,22 +345,97 @@ export default function Hero() {
                 .map((s) => (
                   <HeroSocial key={s.label} label={s.label} href={s.href} />
                 ))}
-            </div>
+            </motion.div>
           </div>
-        </motion.div>
+        </div>
 
-        {/* Strip de empresas */}
+        {/* ── Cintillo de métricas a todo el ancho ── */}
         <motion.div
           initial="hidden"
           animate="visible"
           variants={fadeUp}
-          custom={4}
-          className="mt-14 border-t border-ink-900/10 pt-8 md:mt-16"
+          custom={3.6}
+          className="mt-16 border-y border-ink-900/12 md:mt-20"
+        >
+          <div className="grid grid-cols-2 md:grid-cols-4">
+            {stats.map((s, i) => (
+              <div
+                key={s.key}
+                className={`px-1 py-7 md:px-8 md:py-9 ${
+                  i > 0 ? "md:border-l md:border-ink-900/12" : ""
+                } ${i === 1 || i === 3 ? "border-l border-ink-900/12 pl-5 md:pl-8" : ""} ${
+                  i > 1 ? "border-t border-ink-900/12 md:border-t-0" : ""
+                }`}
+              >
+                <p className="font-display text-[2.6rem] font-medium leading-none text-ink-900 md:text-5xl">
+                  <AnimatedCounter value={s.value} suffix={s.suffix} />
+                </p>
+                <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.16em] text-ink-500">
+                  {s.label}
+                </p>
+                {STAT_DELTA[s.key] && (
+                  <p className="mt-1.5 font-mono text-[11px] font-medium tracking-wide text-accent-green">
+                    {STAT_DELTA[s.key]}
+                  </p>
+                )}
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* ── Colofón: los datos duros en una sola fila ── */}
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={fadeUp}
+          custom={3.9}
+          className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
+        >
+          {info.map((it) => (
+            <div key={it.label} className="flex h-full flex-col">
+              <div className="mb-3 flex items-center gap-2 text-accent-green">
+                <it.Icon className="h-4 w-4" strokeWidth={1.75} />
+                <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-ink-500">
+                  {it.label}
+                </span>
+              </div>
+              <p className="text-sm font-medium leading-snug text-ink-900">{it.value}</p>
+              {it.sub && (
+                <p className="mt-1 text-[11px] leading-snug text-ink-500">{it.sub}</p>
+              )}
+              {it.schools.length > 0 && (
+                <div className="mt-3 space-y-2">
+                  {it.schools.map((s) => (
+                    <div key={s.src} className="flex items-center gap-2">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={s.src}
+                        alt={s.name}
+                        className="h-5 w-5 shrink-0 object-contain"
+                      />
+                      <span className="text-[11px] leading-snug">
+                        <span className="font-semibold text-ink-800">{s.name}</span>
+                        {s.note && <span className="text-ink-500"> · {s.note}</span>}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </motion.div>
+
+        {/* ── Strip de empresas ── */}
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={fadeUp}
+          custom={4.2}
+          className="mt-16 border-t border-ink-900/10 pt-8 md:mt-20"
         >
           <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink-400">
             {t("hero.workedAt", locale)}
           </span>
-          {/* Reparte las empresas a lo ancho completo, con separadores hairline */}
           <div className="mt-6 grid grid-cols-2 gap-y-8 md:grid-cols-4">
             {companies.map((c, i) => (
               <div
@@ -452,9 +446,6 @@ export default function Hero() {
                   i === 3 ? "border-l border-ink-900/10" : ""
                 }`}
               >
-                {/* Los logos que ya traen su propio fondo de marca (Prime Video,
-                    Coppel) se pintan completos; el resto va en un chip claro
-                    para que no se pierdan sobre el hueso. */}
                 {c.tile ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img

@@ -2,7 +2,6 @@
 
 import { useState, FormEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Copy, Check } from "lucide-react";
 import { profile } from "@/lib/data";
 import { useLocale } from "./I18nProvider";
 import { t } from "@/lib/translations";
@@ -21,7 +20,6 @@ export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [copied, setCopied] = useState(false);
 
   function validate() {
     const e: Record<string, string> = {};
@@ -87,11 +85,6 @@ export default function Contact() {
     setErrors({});
   }
 
-  function copyEmail() {
-    navigator.clipboard.writeText(profile.email);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  }
 
   const field =
     "w-full rounded-2xl border border-white/12 bg-white/[0.04] px-5 py-4 text-chalk placeholder:text-chalk-500 transition focus:border-accent-lime/60 focus:outline-none focus:ring-2 focus:ring-accent-lime/20";
@@ -99,7 +92,7 @@ export default function Contact() {
   return (
     <section id="contact" className="relative overflow-hidden bg-espresso px-6 py-28 md:py-36">
       {/* textura sutil de la superficie oscura */}
-      <div className="pointer-events-none absolute inset-0 opacity-[0.35] [background-image:radial-gradient(circle_at_20%_10%,rgba(184,137,63,0.14),transparent_45%),radial-gradient(circle_at_85%_75%,rgba(156,61,46,0.18),transparent_50%)]" />
+      <div className="pointer-events-none absolute inset-0 [background-image:radial-gradient(ellipse_at_50%_0%,rgba(194,90,67,0.16),transparent_58%),radial-gradient(ellipse_at_15%_100%,rgba(194,90,67,0.09),transparent_55%)]" />
 
       <div className="relative mx-auto max-w-2xl">
         <motion.div
@@ -109,36 +102,15 @@ export default function Contact() {
           transition={{ duration: 0.8 }}
           className="text-center"
         >
-          <p className="font-mono text-[11px] uppercase tracking-[0.32em] text-accent-orange">
+          <p className="text-center font-mono text-[11px] uppercase tracking-[0.32em] text-accent-lime">
             {t("contact.kicker", locale)}
           </p>
           <h2 className="mt-6 font-display text-[clamp(2.4rem,6vw,4.5rem)] font-medium leading-[1.02] tracking-tight text-chalk">
             {t("contact.title1", locale)}{" "}
             <span className="text-accent-lime">{t("contact.title2", locale)}</span>
           </h2>
-          <p className="mx-auto mt-6 max-w-lg text-chalk-600">{t("contact.subtitle", locale)}</p>
+          <p className="text-center mx-auto mt-6 max-w-lg text-chalk-600">{t("contact.subtitle", locale)}</p>
 
-          {/* Email directo + copiar */}
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-            <a
-              href={`mailto:${profile.email}`}
-              className="font-mono text-sm text-chalk underline decoration-accent-orange/50 underline-offset-4 transition hover:decoration-accent-orange focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-lime"
-            >
-              {profile.email}
-            </a>
-            <button
-              onClick={copyEmail}
-              aria-label={t("contact.copyEmail", locale)}
-              className="inline-flex items-center gap-1.5 rounded-full border border-white/15 px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-wide text-chalk-600 transition hover:border-accent-lime/50 hover:text-chalk focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-lime"
-            >
-              {copied ? (
-                <Check className="h-3.5 w-3.5 text-accent-lime" />
-              ) : (
-                <Copy className="h-3.5 w-3.5" />
-              )}
-              {copied ? t("contact.copied", locale) : t("contact.copyEmail", locale)}
-            </button>
-          </div>
         </motion.div>
 
         <motion.div
@@ -156,10 +128,10 @@ export default function Contact() {
                 animate={{ opacity: 1, scale: 1 }}
                 className="rounded-3xl border border-white/12 bg-white/[0.04] p-10 text-center"
               >
-                <p className="font-display text-2xl font-medium text-chalk">
+                <p className="text-center font-display text-2xl font-medium text-chalk">
                   {t("contact.formSent", locale)}
                 </p>
-                <p className="mt-3 text-chalk-600">{t("contact.formThanks", locale)}</p>
+                <p className="text-center mt-3 text-chalk-600">{t("contact.formThanks", locale)}</p>
                 <button
                   onClick={resetForm}
                   className="mt-6 rounded-full border border-white/15 px-6 py-2.5 font-mono text-xs uppercase tracking-wider text-chalk-600 transition hover:border-accent-lime/50 hover:text-chalk focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-lime"
@@ -171,7 +143,7 @@ export default function Contact() {
               <motion.form key="form" onSubmit={handleSubmit} className="space-y-4">
                 {/* Selector de método */}
                 <div className="mb-8 text-center">
-                  <p className="mb-3 font-mono text-[10px] uppercase tracking-[0.28em] text-chalk-500">
+                  <p className="text-center mb-3 font-mono text-[10px] uppercase tracking-[0.28em] text-chalk-500">
                     {t("contact.methodLabel", locale)}
                   </p>
                   <div className="inline-flex rounded-full border border-white/12 bg-white/[0.03] p-1">
@@ -222,7 +194,7 @@ export default function Contact() {
                     className={field}
                   />
                   {errors.name && (
-                    <p className="mt-1 font-mono text-xs text-accent-orange">{errors.name}</p>
+                    <p className="mt-1 text-left font-mono text-xs text-accent-orange">{errors.name}</p>
                   )}
                 </div>
 
@@ -237,7 +209,7 @@ export default function Contact() {
                       className={field}
                     />
                     {errors.email && (
-                      <p className="mt-1 font-mono text-xs text-accent-orange">{errors.email}</p>
+                      <p className="mt-1 text-left font-mono text-xs text-accent-orange">{errors.email}</p>
                     )}
                   </div>
                 )}
@@ -252,13 +224,13 @@ export default function Contact() {
                     className={`${field} resize-none`}
                   />
                   {errors.message && (
-                    <p className="mt-1 font-mono text-xs text-accent-orange">{errors.message}</p>
+                    <p className="mt-1 text-left font-mono text-xs text-accent-orange">{errors.message}</p>
                   )}
                 </div>
 
                 {submitError && (
                   <div className="rounded-2xl border border-accent-orange/30 bg-accent-orange/10 p-4 text-center">
-                    <p className="text-sm text-accent-orange">{submitError}</p>
+                    <p className="text-center text-sm text-accent-orange">{submitError}</p>
                     <button
                       type="button"
                       onClick={() => setSubmitError("")}

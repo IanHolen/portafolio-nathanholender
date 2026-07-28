@@ -14,9 +14,9 @@ const config: Config = {
         card: "#fdfaf4", // superficie elevada (tarjetas)
         // Secciones de contraste: café casi negro para dar ritmo al recorrido
         espresso: {
-          DEFAULT: "#191411",
-          soft: "#241d18",
-          line: "#3a312a",
+          DEFAULT: "#14110f",
+          soft: "#201b17",
+          line: "#352e28",
         },
         // Escala normal: 900 = lo más oscuro (texto principal sobre hueso).
         ink: {

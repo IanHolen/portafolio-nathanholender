@@ -51,6 +51,14 @@ export type ExperienceGroup = {
 };
 
 export const experienceGroups: ExperienceGroup[] = [
+  // Prime Video International va aparte: aunque es Amazon, el negocio y el
+  // tipo de operación no tienen nada que ver con retail.
+  {
+    id: "primevideo",
+    name: "Prime Video International",
+    logo: "/companies/primevideo-tile.webp",
+    tile: true,
+  },
   { id: "amazon", name: "Amazon", logo: "/companies/amazon.webp", tile: false },
   { id: "shoplogix", name: "Shoplogix Latam", logo: "/companies/shoplogix.png", tile: false },
   { id: "coppel", name: "Coppel S.A. de C.V.", logo: "/companies/coppel-tile.png", tile: true },
@@ -59,7 +67,7 @@ export const experienceGroups: ExperienceGroup[] = [
 export const experience: ExperienceMeta[] = [
   {
     company: "Amazon · Prime Video International",
-    group: "amazon",
+    group: "primevideo",
     logos: ["/companies/amazon.webp", "/companies/primevideo-tile.webp"],
     stack: [
       "Production Operations",

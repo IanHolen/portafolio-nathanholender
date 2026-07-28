@@ -11,7 +11,7 @@ export default function Error({
       <h2 className="font-display text-4xl font-light text-ink-900">
         Algo salió mal
       </h2>
-      <p className="mt-4 max-w-md text-ink-600">
+      <p className="text-center mt-4 max-w-md text-ink-600">
         Ocurrió un error inesperado. Intenta recargar la página.
       </p>
       <button

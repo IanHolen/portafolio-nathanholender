@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { campaigns } from "@/lib/data";
+import SectionHeader from "./SectionHeader";
 import { useLocale } from "./I18nProvider";
 import { t, tArray } from "@/lib/translations";
 
@@ -12,9 +13,23 @@ interface CampaignText {
   blurb: string;
 }
 
-function Tag({ children }: { children: React.ReactNode }) {
+/* La pieza principal es la única superficie oscura: una tarjeta que flota
+   sobre el hueso en vez de una banda que parte la página en dos. */
+function TagPill({
+  children,
+  dark,
+}: {
+  children: React.ReactNode;
+  dark?: boolean;
+}) {
   return (
-    <span className="rounded-full border border-white/12 bg-white/[0.04] px-3 py-1 font-mono text-[10px] uppercase tracking-[0.14em] text-chalk-500 transition-colors duration-300 group-hover:border-accent-orange/40 group-hover:text-chalk-700">
+    <span
+      className={`rounded-full border px-3 py-1 font-mono text-[10px] uppercase tracking-[0.14em] transition-colors duration-300 ${
+        dark
+          ? "border-white/15 bg-white/[0.05] text-chalk-500 group-hover:border-accent-orange/40 group-hover:text-chalk-700"
+          : "border-ink-900/12 bg-black/[0.03] text-ink-500 group-hover:border-accent-amber/45 group-hover:text-ink-700"
+      }`}
+    >
       {children}
     </span>
   );
@@ -28,58 +43,27 @@ export default function Featured() {
   const rest = campaigns.slice(1);
 
   return (
-    <section
-      id="featured"
-      className="relative overflow-hidden bg-espresso px-6 py-28 md:py-36"
-    >
-      {/* Ambiente cálido de la superficie oscura */}
-      <div className="pointer-events-none absolute inset-0 opacity-[0.5] [background-image:radial-gradient(circle_at_12%_8%,rgba(201,85,63,0.22),transparent_46%),radial-gradient(circle_at_90%_88%,rgba(217,164,65,0.16),transparent_48%)]" />
+    <section id="featured" className="relative px-6 py-32">
+      <div className="mx-auto max-w-6xl">
+        <SectionHeader
+          index="03"
+          kicker={t("featured.kicker", locale)}
+          title={t("featured.title", locale)}
+        />
 
-      <div className="relative mx-auto max-w-6xl">
-        {/* Cabecera */}
-        <div className="mb-12 md:mb-16">
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.6 }}
-            className="flex items-center gap-4"
-          >
-            <span className="rounded-full border border-accent-orange/30 bg-accent-orange/10 px-3 py-1 font-mono text-[11px] tracking-[0.22em] text-accent-orange">
-              N.º 03
-            </span>
-            <span className="h-px flex-1 bg-white/12" />
-            <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-chalk-500">
-              {t("featured.kicker", locale)}
-            </span>
-          </motion.div>
-
-          <motion.h2
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.7, delay: 0.05 }}
-            className="mt-7 max-w-3xl font-display text-[clamp(2.4rem,5.5vw,4.5rem)] font-medium leading-[1.02] tracking-tight text-chalk"
-          >
-            {t("featured.title", locale)}
-          </motion.h2>
-        </div>
-
-        {/* ── Pieza principal ── */}
+        {/* ── Pieza principal: la única superficie oscura de la sección ── */}
         {hero && heroText && (
           <motion.article
             initial={{ opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.7, ease: [0.2, 0.8, 0.2, 1] }}
-            className="group relative overflow-hidden rounded-[32px] border border-white/12 bg-white/[0.035] p-8 transition-all duration-500 hover:border-accent-orange/40 hover:bg-white/[0.055] md:p-12"
+            className="group relative overflow-hidden rounded-[32px] bg-espresso p-8 shadow-[0_40px_80px_-50px_rgba(29,24,21,0.7)] transition-shadow duration-500 hover:shadow-[0_46px_90px_-46px_rgba(29,24,21,0.85)] md:p-12"
           >
-            {/* Halo dorado que despierta en hover */}
-            <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-accent-orange/20 opacity-40 blur-[110px] transition-opacity duration-700 group-hover:opacity-90" />
+            <div className="pointer-events-none absolute inset-0 [background-image:radial-gradient(ellipse_at_18%_0%,rgba(192,138,43,0.18),transparent_60%)]" />
 
             <div className="relative grid gap-10 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] md:items-center md:gap-16">
-              {/* Cifra */}
-              <div className="rounded-3xl border border-accent-orange/20 bg-gradient-to-br from-accent-orange/[0.14] to-transparent p-7 md:p-9">
+              <div className="rounded-3xl border border-accent-orange/25 bg-gradient-to-br from-accent-orange/[0.16] to-transparent p-7 md:p-9">
                 <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-chalk-500">
                   {hero.org} · {hero.year}
                 </p>
@@ -91,7 +75,6 @@ export default function Featured() {
                 </p>
               </div>
 
-              {/* Relato */}
               <div>
                 <h3 className="font-display text-2xl font-medium leading-tight text-chalk md:text-4xl">
                   {heroText.title}
@@ -101,7 +84,9 @@ export default function Featured() {
                 </p>
                 <div className="mt-7 flex flex-wrap gap-2">
                   {hero.tags.map((tag) => (
-                    <Tag key={tag}>{tag}</Tag>
+                    <TagPill key={tag} dark>
+                      {tag}
+                    </TagPill>
                   ))}
                 </div>
               </div>
@@ -109,7 +94,7 @@ export default function Featured() {
           </motion.article>
         )}
 
-        {/* ── Resto ── */}
+        {/* ── El resto, en claro, para no romper el recorrido ── */}
         <div className="mt-6 grid gap-6 md:mt-8 md:grid-cols-3">
           {rest.map((c, idx) => {
             const text = texts[idx + 1];
@@ -125,34 +110,32 @@ export default function Featured() {
                   delay: idx * 0.08,
                   ease: [0.2, 0.8, 0.2, 1],
                 }}
-                className="group relative flex flex-col overflow-hidden rounded-[28px] border border-white/12 bg-white/[0.035] p-7 transition-all duration-500 hover:-translate-y-1.5 hover:border-accent-orange/40 hover:bg-white/[0.06] hover:shadow-[0_30px_60px_-40px_rgba(0,0,0,0.9)]"
+                className="group flex flex-col overflow-hidden rounded-[28px] border border-ink-900/10 bg-card transition-all duration-500 hover:-translate-y-1.5 hover:border-accent-amber/40 hover:shadow-[0_24px_50px_-32px_rgba(29,24,21,0.4)]"
               >
-                <div className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-accent-orange/25 opacity-0 blur-[70px] transition-opacity duration-500 group-hover:opacity-100" />
-
-                <div className="relative flex flex-1 flex-col">
-                  <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-chalk-500">
+                {/* Cabecera con la cifra, sobre un tinte oro deliberado */}
+                <div className="border-b border-ink-900/8 bg-accent-amber/[0.08] px-7 py-6">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink-500">
                     {c.org} · {c.year}
                   </p>
-
-                  <p className="mt-6 font-display text-[2.75rem] font-medium leading-[0.95] text-accent-orange">
+                  <p className="mt-4 font-display text-[2.75rem] font-medium leading-[0.95] text-accent-amber">
                     {text.figure}
                   </p>
-                  <p className="mt-2.5 font-mono text-[11px] uppercase tracking-[0.16em] text-chalk-500">
+                  <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.16em] text-ink-500">
                     {text.unit}
                   </p>
+                </div>
 
-                  <div className="my-6 h-px w-full bg-white/10 transition-colors duration-500 group-hover:bg-accent-orange/30" />
-
-                  <h3 className="font-display text-xl font-medium leading-snug text-chalk">
+                <div className="flex flex-1 flex-col px-7 py-7">
+                  <h3 className="font-display text-xl font-medium leading-snug text-ink-900">
                     {text.title}
                   </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-chalk-600">
+                  <p className="mt-3 text-sm leading-relaxed text-ink-700">
                     {text.blurb}
                   </p>
 
                   <div className="mt-auto flex flex-wrap gap-2 pt-6">
                     {c.tags.map((tag) => (
-                      <Tag key={tag}>{tag}</Tag>
+                      <TagPill key={tag}>{tag}</TagPill>
                     ))}
                   </div>
                 </div>

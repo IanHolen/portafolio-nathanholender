@@ -15,6 +15,18 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Texto corrido justificado en toda la página. Va en la capa base para que
+   cualquier utilidad de Tailwind (text-center, text-right) siga ganando. */
+@layer base {
+  p,
+  li,
+  blockquote {
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;
+  }
+}
+
 html {
   background: var(--bg);
   color: var(--fg);
